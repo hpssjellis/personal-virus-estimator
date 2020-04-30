@@ -378,7 +378,7 @@ async function renderPrediction() {
   if (predictions.length > 0) {
       
     try {
-        myScoreNow = prediction.length * myPersonMultiplier
+        myScoreNow = predictions.length * myPersonMultiplier
         myScoreTotal += myScoreNow
         document.getElementById('myDivNow').innerHTML += 'Score: ' + myScoreNow + '<br>'
         document.getElementById('myDivTotal').innerHTML += 'Score: ' + myScoreTotal + '<br>'
