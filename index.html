@@ -80,7 +80,7 @@ limitations under the License.
           width: auto;
           height: auto;
           ">
-        </video>
+        </video>     <div id="myDivNow">...</div>   <div id="myDivTotal">...</div>  
       </div>
       <div id="scatter-gl-container"></div>
     </div>
@@ -125,8 +125,10 @@ limitations under the License.
  * =============================================================================
  */
 
-
-
+//Global Variables
+let myScoreNow = 0
+let myScoreTotal = 0
+let myPersonMultiplier = 10
 
 
 
@@ -377,6 +379,20 @@ async function renderPrediction() {
 
   document.getElementById('myDiv01').innerHTML = '' 
   if (predictions.length > 0) {
+      
+    try {
+        myScoreNow = prediction.length*myPersonMultiplier
+        myScoreTotal += myScoreNow
+        document.getElementById('myDivScore').innerHTML += 'Score: ' + myScoreNow + '<br>'
+        document.getElementById('myDivTotal').innerHTML += 'Score: ' + myScoreTotal + '<br>'
+        // console.log(prediction.faceInViewConfidence.toFixed(4))
+      }
+      catch(err){
+      document.getElementById('myDiv01').innerHTML = err.message;
+    } 
+      
+      
+      
     predictions.forEach(prediction => {
       try {
         document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(4) + '<br>'
