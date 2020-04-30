@@ -411,11 +411,11 @@ async function renderPrediction() {
       }
         
       const keypoints = prediction.scaledMesh;
-      console.log(keypoints[234])
+     // console.log(keypoints[234])
         
         
       try {
-        document.getElementById('myDiv02').innerHTML = 'Keypoints[0]234, 454: '+ keypoints[234].y +', '+ keypoints[454].y + '<br>'
+        document.getElementById('myDiv02').innerHTML = 'Keypoints[0]234, 454: '+ keypoints[234][2] +', '+ keypoints[454][2] + '<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
       }
       catch(err){
