@@ -90,7 +90,7 @@ limitations under the License.
     
     
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script> -->
 
 
 <!-- <script src="index.js"></script>  -->
@@ -127,11 +127,7 @@ limitations under the License.
 
 
 
-/**
-function tfjsWasm.setWasmPath(
-    `https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@${
-        version}/dist/tfjs-backend-wasm.wasm`);
-*/
+
 
 
  const TRIANGULATION = [
@@ -391,7 +387,6 @@ async function setupCamera() {
 }
 
 async function renderPrediction() {
- // stats.begin();
 
   const predictions = await model.estimateFaces(video);
    // console.log(predictions[0].faceInViewConfidence)
@@ -433,35 +428,9 @@ async function renderPrediction() {
     });
 
       
-    /*  
-      
-    if (renderPointcloud && state.renderPointcloud && scatterGL != null) {
-      const pointsData = predictions.map(prediction => {
-        let scaledMesh = prediction.scaledMesh;
-        return scaledMesh.map(point => ([-point[0], -point[1], -point[2]]));
-      });
-
-      let flattenedPointsData = [];
-      for (let i = 0; i < pointsData.length; i++) {
-        flattenedPointsData = flattenedPointsData.concat(pointsData[i]);
-      }
-      const dataset = new ScatterGL.Dataset(flattenedPointsData);
-
-      if (!scatterGLHasInitialized) {
-        scatterGL.render(dataset);
-      } else {
-        scatterGL.updateDataset(dataset);
-      }
-      scatterGLHasInitialized = true;
-    }
-
-
-    
-    
-    */
+   
    }   
     
-//  stats.end();
   requestAnimationFrame(renderPrediction);
 };
 
@@ -469,8 +438,6 @@ async function main() {
   await tf.setBackend(state.backend);
   setupDatGui();
 
-  //stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
-//  document.getElementById('main').appendChild(stats.dom);
 
   await setupCamera();
   video.play();
@@ -496,20 +463,6 @@ async function main() {
    // console.log(model)
   renderPrediction();
 
-    
-   /* 
-    
-  if (renderPointcloud) {
-    document.querySelector('#scatter-gl-container').style =
-        `width: ${VIDEO_SIZE}px; height: ${VIDEO_SIZE}px;`;
-
-    scatterGL = new ScatterGL(
-        document.querySelector('#scatter-gl-container'),
-        {'rotateOnStart': false, 'selectEnabled': false});
-  }
-   
- 
-   */ 
     
   };   
     
