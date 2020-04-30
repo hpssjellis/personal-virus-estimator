@@ -385,7 +385,9 @@ async function renderPrediction() {
         // console.log(prediction.faceInViewConfidence.toFixed(4))
       }
       catch(err){
-      document.getElementById('myDivNow').innerHTML = err.message;
+     // document.getElementById('myDivNow').innerHTML = err.message;
+          console.log('err.message from divNow')
+          console.log(err.message)
     } 
       
       
