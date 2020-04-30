@@ -39,11 +39,11 @@ limitations under the License.
     <!-- <script>tf.setBackend('wasm').then(() => main());</script> -->
 
 
-<!-- <script src="stats.min.js"></script>  -->
 
 
 
-<script src="triangulation.js"></script>
+
+
 
    
     
@@ -383,12 +383,12 @@ async function renderPrediction() {
     try {
         myScoreNow = prediction.length * myPersonMultiplier
         myScoreTotal += myScoreNow
-        document.getElementById('myDivScore').innerHTML += 'Score: ' + myScoreNow + '<br>'
+        document.getElementById('myDivNow').innerHTML += 'Score: ' + myScoreNow + '<br>'
         document.getElementById('myDivTotal').innerHTML += 'Score: ' + myScoreTotal + '<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
       }
       catch(err){
-      document.getElementById('myDivScore').innerHTML = err.message;
+      document.getElementById('myDivNow').innerHTML = err.message;
     } 
       
       
