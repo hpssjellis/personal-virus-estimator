@@ -432,6 +432,9 @@ async function renderPrediction() {
       }
     });
 
+      
+    /*  
+      
     if (renderPointcloud && state.renderPointcloud && scatterGL != null) {
       const pointsData = predictions.map(prediction => {
         let scaledMesh = prediction.scaledMesh;
@@ -453,6 +456,11 @@ async function renderPrediction() {
     }
   }
 
+    
+    
+    */
+    
+    
 //  stats.end();
   requestAnimationFrame(renderPrediction);
 };
@@ -488,6 +496,9 @@ async function main() {
    // console.log(model)
   renderPrediction();
 
+    
+   /* 
+    
   if (renderPointcloud) {
     document.querySelector('#scatter-gl-container').style =
         `width: ${VIDEO_SIZE}px; height: ${VIDEO_SIZE}px;`;
@@ -496,7 +507,13 @@ async function main() {
         document.querySelector('#scatter-gl-container'),
         {'rotateOnStart': false, 'selectEnabled': false});
   }
-};
+ };   
+ 
+   */ 
+    
+    
+    
+
 
 main();
       
