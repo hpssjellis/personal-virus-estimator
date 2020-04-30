@@ -9,4 +9,4 @@ See Demo at
 https://hpssjellis.github.io/personal-virus-estimator/
 
 
-This is an estimator not a predictor. Untilscience has better information this is nothing better than a game.
+This is an estimator not a predictor. Until science has better information this is nothing better than a game.
