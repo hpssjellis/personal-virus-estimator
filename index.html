@@ -332,7 +332,6 @@ const mobile = isMobile();
 // Don't render the point cloud on mobile in order to maximize performance and
 // to avoid crowding limited screen space.
 const renderPointcloud = mobile === false;
-//const stats = new Stats();
 const state = {
   backend: 'wasm',
   maxFaces: 10,
@@ -436,7 +435,7 @@ async function renderPrediction() {
 
 async function main() {
   await tf.setBackend(state.backend);
-  setupDatGui();
+  //setupDatGui();
 
 
   await setupCamera();
@@ -460,7 +459,6 @@ async function main() {
   ctx.lineWidth = 0.5;
 
   model = await facemesh.load({maxFaces: state.maxFaces});
-   // console.log(model)
   renderPrediction();
 
     
