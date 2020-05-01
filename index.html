@@ -386,24 +386,7 @@ async function renderPrediction() {
 
   document.getElementById('myDiv01').innerHTML = '' 
   if (predictions.length > 0) {
-     
-      /*
       
-      
-    try {
-        myScoreNow = predictions.length * myPersonMultiplier
-        myScoreTotal += myScoreNow
-        document.getElementById('myDivNow').innerHTML = 'Score: ' + myScoreNow + '<br>'
-        document.getElementById('myDivTotal').innerHTML = 'Score: ' + myScoreTotal + '<br>'
-        // console.log(prediction.faceInViewConfidence.toFixed(4))
-      }
-      catch(err){
-     // document.getElementById('myDivNow').innerHTML = err.message;
-          console.log('err.message from divNow')
-          console.log(err.message)
-    } 
-      
-   */   
       
     predictions.forEach(prediction => {
 
@@ -416,28 +399,15 @@ async function renderPrediction() {
         if (myCloseness < 0 ){myCloseness = 0}
         myScoreNow =  prediction.faceInViewConfidence * myCloseness * myPersonMultiplier 
         myScoreTotal += myScoreNow
-        document.getElementById('myDivNow').innerHTML = 'Score: ' + myScoreNow + '<br>'
-        document.getElementById('myDivTotal').innerHTML = 'Score: ' + myScoreTotal + '<br>' 
-        document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(4) + ', close ratio=' + myCloseness + '<br>'
+        document.getElementById('myDivNow').innerHTML = 'Score: ' + myScoreNow.toFixed(4) + '<br>'
+        document.getElementById('myDivTotal').innerHTML = 'Score: ' + myScoreTotal.toFixed(4) + '<br>' 
+        document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(4) + ', close ratio=' + myCloseness.toFixed(4) + '<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
       }
       catch(err){
       document.getElementById('myDiv01').innerHTML = err.message;
       }   
-        
-        
-        
-        
-      /*  
-      try {
-        document.getElementById('myDiv02').innerHTML = 'Keypoints[0]234, 454: '+ keypoints[234][0] +', '+ keypoints[454][0] + '<br>'
-        // console.log(prediction.faceInViewConfidence.toFixed(4))
-      }
-      catch(err){
-      document.getElementById('myDiv02').innerHTML = err.message;
-      }
-        
-      */  
+         
         
         
         
