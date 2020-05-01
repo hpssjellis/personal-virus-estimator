@@ -68,7 +68,17 @@ limitations under the License.
     
 </style>
 </head>
-<body>
+<body onload="{
+   myStorage1 = localStorage.getItem('myStoredText1')
+   if(myStorage1  != null){     
+      document.getElementById('myDateTime').value = myStorage1 
+    }   
+    myStorage2 = localStorage.getItem('myStoredText2')
+    if(myStorage2  != null){
+       document.getElementById('myTotalCount').value = myStorage2      
+    }
+          
+}">
   <div id="main">	
     <div class="container">        	
       <div class="canvas-wrapper">
@@ -102,6 +112,15 @@ limitations under the License.
    }"><br>
   <div id="myDiv01">...</div> 
   <div id="myDiv02">...</div>   
+    
+    <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value"><br>
+    <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value">
+    
+    <input type="button" value="Store dateTime and Total Count" onClick="{
+   localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
+   localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)
+   alert('DateTime =' + document.getElementById('myDateTime').value +'\n\nTotal Count='+ document.getElementById('myTotalCount').value +' \n\nHas been stored')
+}">
     
 </body>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script> -->
