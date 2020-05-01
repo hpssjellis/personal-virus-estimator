@@ -411,11 +411,10 @@ async function renderPrediction() {
       const keypoints = prediction.scaledMesh;
      // console.log(keypoints[234])
      
-           try {
+       try {
         let myCloseness =  ((keypoints[454][0] - keypoints[234][0]) - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~200
         if (myCloseness < 0 ){myCloseness = 0}
-        
-        myScoreNow =  prediction.faceInViewConfidence * myPersonMultiplier 
+        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myPersonMultiplier 
         myScoreTotal += myScoreNow
         document.getElementById('myDivNow').innerHTML = 'Score: ' + myScoreNow + '<br>'
         document.getElementById('myDivTotal').innerHTML = 'Score: ' + myScoreTotal + '<br>' 
