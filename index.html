@@ -508,7 +508,7 @@ async function renderPrediction() {
         myDoSet = false   
         myScoreNow = 0  
         myMax10Score = 0 
-       // document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' 
+        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' 
 
 
 
@@ -557,6 +557,16 @@ async function renderPrediction() {
         document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0)+ ', total above : ' + myMax10Score.toFixed(0) + '<br>' 
         document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', close ratio: ' + myCloseness.toFixed(4) + ', mouth: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
+
+        // need to save this new total score
+        document.getElementById('myTotalCount').value = myScoreTotal  
+        localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
+
+
+
+
+
+
       }
       catch(err){
       document.getElementById('myDiv01').innerHTML = err.message;
