@@ -131,7 +131,7 @@ limitations under the License.
         </div>
 
     
-      <div id="myDivNow">...</div>   <div id="myDivTotal">...</div>  
+      Virus' per second: <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
            </div>
         </div> 
     <h3>This is an estimator not a predictor. Assumes that everyone is contagious. <br>Until science has better information this is nothing better than a game.</h3>
@@ -228,8 +228,8 @@ let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on
 let myReductionPerInterval = 100  // number of virus you can expell per second. This is important
 
 
-
-
+let myMax10Score = 0
+let myMaxWaitScore = 0
 
 
 
@@ -492,11 +492,11 @@ async function renderPrediction() {
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
       
-        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: 0 <br>'
+        document.getElementById('myDivNow').innerHTML = '0'
         document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
-        document.getElementById('myTotalCount').value = myScoreTotal
+        document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
         localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
         localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
       
@@ -506,7 +506,13 @@ async function renderPrediction() {
 
            
         myDoSet = false   
-           
+        myScoreNow = 0  
+        myMax10Score = 0 
+        //document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' 
+
+
+
+
         predictions.forEach(prediction => {
 
         
@@ -525,7 +531,7 @@ async function renderPrediction() {
           
           // backing up to local storage 
           document.getElementById('myDateTime').value =  myTimeSinceRestart
-          document.getElementById('myTotalCount').value = myScoreTotal
+          document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
           localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
           localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
        }
@@ -544,11 +550,23 @@ async function renderPrediction() {
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
            
         myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
-        myScoreTotal += myScoreNow
-        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' + myScoreNow.toFixed(0) + '<br>'
-        document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
+        myMax10Score += myScoreNow
+       
+        myScoreTotal += myScoreNow               
+        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' + myMax10Score.toFixed(0) 
+        document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0)+  '<br>' 
         document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', close ratio: ' + myCloseness.toFixed(4) + ', mouth: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
+
+        // need to save this new total score
+        document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)  
+        localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
+
+
+
+
+
+
       }
       catch(err){
       document.getElementById('myDiv01').innerHTML = err.message;
