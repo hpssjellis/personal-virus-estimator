@@ -392,18 +392,21 @@ async function renderPrediction() {
   if (predictions.length > 0) {
       
       
-    predictions.forEach(prediction => {
-
-        
-      const keypoints = prediction.scaledMesh;
-     // console.log(keypoints[234])
-     
       // myTimeSinceRestart = new Date().getTime()
        let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
        if (elapsedTime >= 3000){ 
           myTimeSinceRestart = new Date().getTime()
            
          document.getElementById('myDiv01').innerHTML = '' 
+           
+           
+           
+        predictions.forEach(prediction => {
+
+        
+        const keypoints = prediction.scaledMesh;
+     // console.log(keypoints[234])
+
        try {
         let myFaceWidth =  keypoints[454][0] - keypoints[234][0]  
         let myCloseness =  (myFaceWidth - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
