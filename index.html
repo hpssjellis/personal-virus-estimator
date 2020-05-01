@@ -135,7 +135,8 @@ let myScoreNow = 0
 let myScoreTotal = 0
 let myPersonMultiplier = 10
 let myStopApp = false
-let myDistanceCutoff = 100   // Distance in pixels that a facewidth is not relevant  close = 600-200  
+let myDistanceCutoff = 50   // Distance in pixels that a facewidth is not relevant  close = 600-200  
+let myMouthOpenCutoff = 10
 
 
 
@@ -395,13 +396,21 @@ async function renderPrediction() {
      // console.log(keypoints[234])
      
        try {
-        let myCloseness =  ((keypoints[454][0] - keypoints[234][0]) - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~200
+        let myCloseness =  ((keypoints[454][0] - keypoints[234][0]) - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
         if (myCloseness < 0 ){myCloseness = 0}
-        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myPersonMultiplier 
+  
+        let myMouthShut =  ((keypoints[14][1] - keypoints[13][1]) )/ myMouthOpenCutoff    // myMouthOpenCutoff default ~10
+        if (myMouthShut < 1 ){myMouthShut = 1}
+           
+           
+           
+           
+           
+        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
         myScoreTotal += myScoreNow
         document.getElementById('myDivNow').innerHTML = 'Score: ' + myScoreNow.toFixed(4) + '<br>'
         document.getElementById('myDivTotal').innerHTML = 'Score: ' + myScoreTotal.toFixed(4) + '<br>' 
-        document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(4) + ', close ratio=' + myCloseness.toFixed(4) + '<br>'
+        document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(4) + ', close ratio: ' + myCloseness.toFixed(4) + ', mouth: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
       }
       catch(err){
