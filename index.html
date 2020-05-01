@@ -406,7 +406,12 @@ async function renderPrediction() {
    */   
       
     predictions.forEach(prediction => {
-      try {
+
+        
+      const keypoints = prediction.scaledMesh;
+     // console.log(keypoints[234])
+     
+           try {
         let myCloseness =  ((keypoints[454][0] - keypoints[234][0]) - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~200
         if (myCloseness < 0 ){myCloseness = 0}
         
@@ -419,12 +424,12 @@ async function renderPrediction() {
       }
       catch(err){
       document.getElementById('myDiv01').innerHTML = err.message;
-      }
-        
-      const keypoints = prediction.scaledMesh;
-     // console.log(keypoints[234])
+      }   
         
         
+        
+        
+      /*  
       try {
         document.getElementById('myDiv02').innerHTML = 'Keypoints[0]234, 454: '+ keypoints[234][0] +', '+ keypoints[454][0] + '<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
@@ -433,7 +438,7 @@ async function renderPrediction() {
       document.getElementById('myDiv02').innerHTML = err.message;
       }
         
-        
+      */  
         
         
         
