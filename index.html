@@ -173,8 +173,8 @@ let myTimeSinceRestart = 0
 let myTimeSinceAwake = 0
 let myDoSet = true                // for calculating all people not just the first
 
-let myDetectionInterval = 1000   // milliseconds
-let myReductionPerInterval = 10  // number of virus you can expell per second
+let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on 1 second intervals
+let myReductionPerInterval = 10  // number of virus you can expell per second. This is important
 
 
 
@@ -467,9 +467,9 @@ async function renderPrediction() {
            
         myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
         myScoreTotal += myScoreNow
-        document.getElementById('myDivNow').innerHTML = 'Virus Now: ' + myScoreNow.toFixed(4) + '<br>'
-        document.getElementById('myDivTotal').innerHTML = 'Total Virus: ' + myScoreTotal.toFixed(4) + '<br>' 
-        document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(4) + ', close ratio: ' + myCloseness.toFixed(4) + ', mouth: ' + myMouthShut.toFixed(2)    +'<br>'
+        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' + myScoreNow.toFixed(3) + '<br>'
+        document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
+        document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', close ratio: ' + myCloseness.toFixed(4) + ', mouth: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
       }
       catch(err){
