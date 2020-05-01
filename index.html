@@ -137,8 +137,11 @@ let myPersonMultiplier = 10
 let myStopApp = false
 let myDistanceCutoff = 50   // Distance in pixels that a facewidth is not relevant  close = 600-200  
 let myMouthOpenCutoff = 0.03
+let myTimeSinceRestart 
 
 
+// myTimeSinceRestart = new Date().getTime()
+// let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
 
  const TRIANGULATION = [
     127, 34, 139, 11, 0, 37, 232, 231, 120, 72, 37, 39, 128, 121, 47, 232, 121,
@@ -395,6 +398,10 @@ async function renderPrediction() {
       const keypoints = prediction.scaledMesh;
      // console.log(keypoints[234])
      
+      // myTimeSinceRestart = new Date().getTime()
+       let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
+       if (elapsedTime >= 3000){ 
+          myTimeSinceRestart = new Date().getTime()
        try {
         let myFaceWidth =  keypoints[454][0] - keypoints[234][0]  
         let myCloseness =  (myFaceWidth - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
@@ -418,7 +425,7 @@ async function renderPrediction() {
       document.getElementById('myDiv01').innerHTML = err.message;
       }   
          
-        
+      }   
         
         
       if (state.triangulateMesh) {
