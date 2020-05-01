@@ -107,15 +107,15 @@ limitations under the License.
         </div> 
     <h3>This is an estimator not a predictor. Assumes that everyone is contagious. <br>Until science has better information this is nothing better than a game.</h3>
 
-    <input type=button value="Turn Off" onclick="{
+    <input id="myOffButton" type=button value="Turn Video Off" onclick="{
        if (myStopApp){ 
           myStopApp = false                                      
          document.getElementById('video').play()
-         this.value = 'Turn On'
+         document.getElementById('myOffButton').value = 'Turn Video On'
        } else {
             myStopApp = true
             document.getElementById('video').pause()
-            this.value = 'Turn Off'                                     
+            document.getElementById('myOffButton').value = 'Turn Video Off'                                   
        }                                   
    }">
     
