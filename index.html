@@ -476,13 +476,13 @@ async function renderPrediction() {
 
   if   (predictions.length <= 0) {                                           // not doing the below but still need to reduce virus
        let elapsedTime2 = new Date().getTime() - myTimeSinceRestart;  // in ms
-       console.log('elapsedTime2')
-       console.log(elapsedTime2)
+      // console.log('elapsedTime2')
+      // console.log(elapsedTime2)
        if (elapsedTime2 >= myDetectionInterval){
-         
+           myTimeSinceRestart = new Date().getTime()
            myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
-           console.log('myScoreTotal')          
-           console.log(myScoreTotal)
+          // console.log('myScoreTotal')          
+          // console.log(myScoreTotal)
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
       
