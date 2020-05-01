@@ -4,7 +4,13 @@ Use machine Learning to help estimate pre-infection allowable viral load
 Started April 30th, 2020
 
 
-See Demo at
+See Latest Stable Demo at
+
+
+https://hpssjellis.github.io/personal-virus-estimator/latestRawDemo.html
+
+
+Demo of what I am working on now at
 
 https://hpssjellis.github.io/personal-virus-estimator/
 
