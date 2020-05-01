@@ -401,14 +401,15 @@ async function renderPrediction() {
         if (myCloseness < 0 ){myCloseness = 0}
         
         let myMouthOpen = (keypoints[14][1] - keypoints[13][1])
-        let myMouthShut =  (myMouthOpen )/ (myMouthOpenCutoff * myFaceWidth)    // myMouthOpenCutoff default ~10
+        let myMouthShut = prediction.faceInViewConfidence * ( (myMouthOpen )/ (myMouthOpenCutoff * myFaceWidth) )   // myMouthOpenCutoff default ~0.03
 
            
         console.log('myMouthOpen')   
         console.log(myMouthOpen)   
         console.log('myMouthShut')   
         console.log(myMouthShut)   
-        if (myMouthShut < 1 ){myMouthShut = 1}       
+           
+        //if (myMouthShut < 1 ){myMouthShut = 1}       
            
            
         myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
