@@ -450,6 +450,12 @@ async function renderPrediction() {
          document.getElementById('myDiv01').innerHTML = ''
          myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
          if (myScoreTotal < 0){myScoreTotal = 0}  
+          
+          // backing up to local storage 
+          document.getElementById('myDateTime').value =  myTimeSinceRestart
+          document.getElementById('myTotalCount').value = myScoreTotal
+          localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
+          localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
        }
        
      if (myDoSet){       
