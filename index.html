@@ -506,7 +506,13 @@ async function renderPrediction() {
 
            
         myDoSet = false   
-        myScoreNow = 0   
+        myScoreNow = 0  
+        myMax10Score = 0 
+        document.getElementById('myDivNow').innerHTML += 'Virus\' per second: ' 
+
+
+
+
         predictions.forEach(prediction => {
 
         
@@ -543,10 +549,12 @@ async function renderPrediction() {
         if (myMouthShut < 1 ){myMouthShut = 1}       
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
            
-        myScoreNow +=  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
+        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
+        myMax10Score += myScoreNow
+       
         myScoreTotal += myScoreNow               ////////////////////// issue adding toomany times
-        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' + myScoreNow.toFixed(0) + '<br>'
-        document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
+        document.getElementById('myDivNow').innerHTML += myScoreNow.toFixed(0) + ', '
+        document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0)+ ', total above : ' + myMax10Score           +   '<br>' 
         document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', close ratio: ' + myCloseness.toFixed(4) + ', mouth: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
       }
