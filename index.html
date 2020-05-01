@@ -71,11 +71,13 @@ limitations under the License.
 <body onload="{
    myStorage1 = localStorage.getItem('myStoredText1')
    if(myStorage1  != null){     
-      document.getElementById('myDateTime').value = myStorage1 
+      document.getElementById('myDateTime').value = myStorage1
+      myTimeSinceRestart =  myStorage1       
     }   
     myStorage2 = localStorage.getItem('myStoredText2')
     if(myStorage2  != null){
-       document.getElementById('myTotalCount').value = myStorage2      
+       document.getElementById('myTotalCount').value = myStorage2  
+        myScoreTotal =  myStorage2     
     }
           
 }">
