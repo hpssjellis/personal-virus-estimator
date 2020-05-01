@@ -134,16 +134,25 @@ limitations under the License.
 let myScoreNow = 0
 let myScoreTotal = 0
 let myPersonMultiplier = 10
+
 let myStopApp = false
 let myDistanceCutoff = 50   // Distance in pixels that a facewidth is not relevant  close = 600-200  
 let myMouthOpenCutoff = 0.03
+
 let myTimeSinceRestart = 0 
 let myTimeSinceAwake = 0
 let myDoSet = true                // for calculating all people not just the first
-let myDetectionInterval = 1000   // milliseconds
 
-// myTimeSinceRestart = new Date().getTime()
-// let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
+let myDetectionInterval = 1000   // milliseconds
+let myReductionPerInterval = 10  // number of virus you can expell per second
+
+
+
+
+
+
+
+
 
  const TRIANGULATION = [
     127, 34, 139, 11, 0, 37, 232, 231, 120, 72, 37, 39, 128, 121, 47, 232, 121,
@@ -409,6 +418,7 @@ async function renderPrediction() {
           myTimeSinceRestart = new Date().getTime()
            
          document.getElementById('myDiv01').innerHTML = ''
+         myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
        }
        
      if (myDoSet){       
