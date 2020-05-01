@@ -160,7 +160,7 @@ limitations under the License.
     
     
     <br>
-  <div id="myDiv01">...</div> 
+  Virus' per second: <div id="myDiv01">...</div> 
   <div id="myDiv02">...</div>   
     
     DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value"><br>
@@ -492,7 +492,7 @@ async function renderPrediction() {
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
       
-        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: 0 <br>'
+        document.getElementById('myDivNow').innerHTML = '0'
         document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
@@ -508,7 +508,7 @@ async function renderPrediction() {
         myDoSet = false   
         myScoreNow = 0  
         myMax10Score = 0 
-        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' 
+       // document.getElementById('myDivNow').innerHTML = 'Virus\' per second: ' 
 
 
 
