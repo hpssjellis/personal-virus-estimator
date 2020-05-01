@@ -450,8 +450,16 @@ async function renderPrediction() {
   ctx.drawImage(
       video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
 
-  if   (predictions.length <= 0) {    // not doing the below buyt still need to reduce virus
-      myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
+  if   (predictions.length <= 0) {                                           // not doing the below but still need to reduce virus
+       let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
+       if (elapsedTime >= myDetectionInterval){
+           myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
+       }   
+       if (myScoreTotal < 0){myScoreTotal = 0} 
+      
+        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: 0 <br>'
+        document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
+      
   }
   if (predictions.length > 0) {
       
