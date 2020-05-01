@@ -96,13 +96,17 @@ limitations under the License.
    if(myStorage1  != null){     
       document.getElementById('myDateTime').value = myStorage1
       myTimeSinceRestart =  myStorage1       
-    }   
+    }   else {
+      myTimeSinceRestart = new Date().getTime()        
+      document.getElementById('myDateTime').value = myTimeSinceRestart        
+    }
     myStorage2 = localStorage.getItem('myStoredText2')
     if(myStorage2  != null){
        document.getElementById('myTotalCount').value = myStorage2  
         myScoreTotal =  myStorage2     
     } else { 
-        myScoreTotal = 0         
+        myScoreTotal = 0 
+        document.getElementById('myTotalCount').value = myScoreTotal
    }
           
 }">
