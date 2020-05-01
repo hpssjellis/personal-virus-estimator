@@ -108,8 +108,10 @@ limitations under the License.
     <h3>This is an estimator not a predictor. Assumes that everyone is contagious. <br>Until science has better information this is nothing better than a game.</h3>
 
     <input type=button value=off onclick="{
-       if (myStopApp){ myStopApp = false}
-       else {
+       if (myStopApp){ 
+           myStopApp = false                                      
+         document.getElementById('video').play()
+       } else {
          myStopApp = true
          document.getElementById('video').pause()
        }                                   
@@ -174,6 +176,8 @@ let myMouthOpenCutoff = 0.03
 let myTimeSinceRestart 
 let myTimeSinceAwake = 0
 let myDoSet = true                // for calculating all people not just the first
+
+
 
 let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on 1 second intervals
 let myReductionPerInterval = 10  // number of virus you can expell per second. This is important
@@ -511,8 +515,10 @@ async function renderPrediction() {
       
    
    }   
-    
-  requestAnimationFrame(renderPrediction);
+  
+    if (myStopApp == false){
+      requestAnimationFrame(renderPrediction);
+   }
 };
 
 async function main() {
