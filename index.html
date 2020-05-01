@@ -389,7 +389,6 @@ async function renderPrediction() {
   ctx.drawImage(
       video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
 
-  document.getElementById('myDiv01').innerHTML = '' 
   if (predictions.length > 0) {
       
       
@@ -403,6 +402,8 @@ async function renderPrediction() {
        let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
        if (elapsedTime >= 3000){ 
           myTimeSinceRestart = new Date().getTime()
+           
+         document.getElementById('myDiv01').innerHTML = '' 
        try {
         let myFaceWidth =  keypoints[454][0] - keypoints[234][0]  
         let myCloseness =  (myFaceWidth - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
