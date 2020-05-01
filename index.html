@@ -117,7 +117,19 @@ limitations under the License.
             document.getElementById('video').pause()
             this.value = 'Turn Off'                                     
        }                                   
-   }"><br>
+   }">
+    
+    <input type=button value="Reset App" onclick="{
+          myScoreTotal = 0      
+          myTimeSinceRestart = new Date().getTime()
+          document.getElementById('myDateTime').value =  myTimeSinceRestart
+          document.getElementById('myTotalCount').value = myScoreTotal
+          localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
+          localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)  
+    }">
+    
+    
+    <br>
   <div id="myDiv01">...</div> 
   <div id="myDiv02">...</div>   
     
