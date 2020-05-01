@@ -139,7 +139,7 @@ let myDistanceCutoff = 50   // Distance in pixels that a facewidth is not releva
 let myMouthOpenCutoff = 0.03
 let myTimeSinceRestart = 0 
 let myTimeSinceAwake = 0
-
+let myDoSet = true                // for calculating all people not just the first
 
 // myTimeSinceRestart = new Date().getTime()
 // let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
@@ -393,7 +393,7 @@ async function renderPrediction() {
       
 
            
-           
+        myDoSet = false   
            
         predictions.forEach(prediction => {
 
@@ -404,9 +404,13 @@ async function renderPrediction() {
       // myTimeSinceRestart = new Date().getTime()
        let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
        if (elapsedTime >= 3000){ 
+          myDoSet = true; 
           myTimeSinceRestart = new Date().getTime()
            
-         document.getElementById('myDiv01').innerHTML = '' 
+         document.getElementById('myDiv01').innerHTML = ''
+       }
+       
+     if (myDoSet){       
        try {
         let myFaceWidth =  keypoints[454][0] - keypoints[234][0]  
         let myCloseness =  (myFaceWidth - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
