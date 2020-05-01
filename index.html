@@ -450,6 +450,9 @@ async function renderPrediction() {
   ctx.drawImage(
       video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
 
+  if   (predictions.length <= 0) {    // not doing the below buyt still need to reduce virus
+      myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
+  }
   if (predictions.length > 0) {
       
 
