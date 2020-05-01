@@ -140,6 +140,7 @@ let myMouthOpenCutoff = 0.03
 let myTimeSinceRestart = 0 
 let myTimeSinceAwake = 0
 let myDoSet = true                // for calculating all people not just the first
+let myDetectionInterval = 1000   // milliseconds
 
 // myTimeSinceRestart = new Date().getTime()
 // let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
@@ -403,7 +404,7 @@ async function renderPrediction() {
       
       // myTimeSinceRestart = new Date().getTime()
        let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
-       if (elapsedTime >= 3000){ 
+       if (elapsedTime >= myDetectionInterval){  
           myDoSet = true; 
           myTimeSinceRestart = new Date().getTime()
            
