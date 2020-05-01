@@ -131,7 +131,7 @@ limitations under the License.
         </div>
 
     
-      Virus' per second: <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
+     <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
            </div>
         </div> 
     <h3>This is an estimator not a predictor. Assumes that everyone is contagious. <br>Until science has better information this is nothing better than a game.</h3>
@@ -492,7 +492,7 @@ async function renderPrediction() {
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
       
-        document.getElementById('myDivNow').innerHTML = '0'
+        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: 0'
         document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
