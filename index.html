@@ -419,6 +419,7 @@ async function renderPrediction() {
            
          document.getElementById('myDiv01').innerHTML = ''
          myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
+         if (myScoreTotal < 0){myScoreTotal = 0}  
        }
        
      if (myDoSet){       
