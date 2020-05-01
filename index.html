@@ -396,10 +396,12 @@ async function renderPrediction() {
      // console.log(keypoints[234])
      
        try {
-        let myCloseness =  ((keypoints[454][0] - keypoints[234][0]) - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
+        let myFaceWidth =  keypoints[454][0] - keypoints[234][0]  
+        let myCloseness =  (myFaceWidth - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
         if (myCloseness < 0 ){myCloseness = 0}
-  
-        let myMouthShut =  ((keypoints[14][1] - keypoints[13][1]) )/ myMouthOpenCutoff    // myMouthOpenCutoff default ~10
+        
+        let myMouthOpen = (keypoints[14][1] - keypoints[13][1])
+        let myMouthShut =  (myMouthOpen )/ (myMouthOpenCutoff * myFaceWidth)    // myMouthOpenCutoff default ~10
         if (myMouthShut < 1 ){myMouthShut = 1}
            
            
