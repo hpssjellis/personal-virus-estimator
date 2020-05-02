@@ -190,7 +190,23 @@ limitations under the License.
           localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)  
           localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)  
     }">
-    
+
+
+       <input id="myCameraButton" type=button value="Rear Camera" onclick="{
+       if (myFacingModeSetting == 'user'){ 
+           myFacingModeSetting = 'environment'                                    
+           document.getElementById('myCameraButton').value = 'Front Camera'
+           document.getElementById('myCameraMode').value = myFacingModeSetting
+           localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+           location.reload();
+       } else {
+          myFacingModeSetting = 'user'                                    
+          document.getElementById('myCameraButton').value = 'Rear Camera' 
+          document.getElementById('myCameraMode').value = myFacingModeSetting
+          localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+          location.reload();                            
+       }                                   
+   }"> 
     
     <br>
   <div id="myDiv01">...</div> 
