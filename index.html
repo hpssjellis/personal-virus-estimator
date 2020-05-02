@@ -148,6 +148,24 @@ limitations under the License.
             document.getElementById('myOffButton').value = 'Turn Video On'                                   
        }                                   
    }">
+
+
+
+    <input id="myCameraButton" type=button value="Rear Camera" onclick="{
+       if (myFacingModeSetting == 'user'){ 
+           myFacingModeSetting = 'environment'                                    
+          document.getElementById('myCameraButton').value = 'Front Camera'
+          main();
+       } else {
+          myFacingModeSetting = 'environment'                                    
+          document.getElementById('myCameraButton').value = 'Rear Camera'  
+          main();                               
+       }                                   
+   }">
+
+
+
+
     
     <input type=button value="Reset App" onclick="{
           myScoreTotal = 0      
@@ -231,7 +249,7 @@ let myReductionPerInterval = 100  // number of virus you can expell per second. 
 let myMax10Score = 0
 let myMaxWaitScore = 0
 
-
+let myFacingModeSetting = 'user'
 
 
 
@@ -457,7 +475,7 @@ async function setupCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({
     'audio': false,
     'video': {
-      facingMode: 'user',
+      facingMode: myFacingModeSetting,
       // Only setting the video to a specified size in order to accommodate a
       // point cloud, so on mobile devices accept the default size.
       width: mobile ? undefined : VIDEO_SIZE,
