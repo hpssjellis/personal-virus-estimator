@@ -224,11 +224,13 @@ limitations under the License.
    localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)
    localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)
    localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+ /*
    alert('DateTime =' + document.getElementById('myDateTime').value +
         '\n\nTotal Count='+ document.getElementById('myTotalCount').value +
         '\n\nLast Reading='+ document.getElementById('myLastReading').value +
         '\n\nCamera Mode='+ document.getElementById('myCameraMode').value +
         '\n\nHas been stored, now resetting App')
+ */                                                            
    location.reload()
 }">
     
@@ -467,17 +469,7 @@ let myFacingModeSetting = 'user'
     
      
 function myDitchVideo(){
-let tracks = window.localstream.getTracks();
- let myVideo = document.querySelector('#video');
- tracks.forEach(function(track) {
-     if (track.kind === 'video') {
-         if (track.enabled) {
-             track.stop();
-             track.enabled = false; 
-         }
-     }
- });
- myVideo.srcObject = null;
+// not yet fully stopping webcam
 }    
     
     
