@@ -119,8 +119,8 @@ limitations under the License.
 
     myStorage3 = localStorage.getItem('myStoredText3')
     if(myStorage3  != null){
-       document.getElementById('myLastReading').value = myStorage2  
-        yLastAverage =  myStorage3     
+       document.getElementById('myLastReading').value = myStorage3  
+        myLastAverage =  myStorage3     
     } else { 
         myLastAverage = 0 
         document.getElementById('myLastReading').value = myLastAverage
@@ -170,13 +170,15 @@ limitations under the License.
     <input id="myOffButton" type=button value="Turn Video Off" onclick="{
        if (myStopApp){ 
           myStopApp = false                                      
-         document.getElementById('video').play()
-         renderPrediction();
+        // document.getElementById('video').play()
+        // renderPrediction();
          document.getElementById('myOffButton').value = 'Turn Video Off'
+         location.reload()
        } else {
             myStopApp = true
             document.getElementById('video').pause()
-            document.getElementById('myOffButton').value = 'Turn Video On'                                   
+            document.getElementById('myOffButton').value = 'Turn Video On'
+            myDitchVideo()                                   
        }                                   
    }">
     
@@ -222,11 +224,13 @@ limitations under the License.
    localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)
    localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)
    localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+ /*
    alert('DateTime =' + document.getElementById('myDateTime').value +
         '\n\nTotal Count='+ document.getElementById('myTotalCount').value +
         '\n\nLast Reading='+ document.getElementById('myLastReading').value +
         '\n\nCamera Mode='+ document.getElementById('myCameraMode').value +
         '\n\nHas been stored, now resetting App')
+ */                                                            
    location.reload()
 }">
     
@@ -463,7 +467,10 @@ let myFacingModeSetting = 'user'
     420, 363, 361, 401, 288, 265, 372, 353, 390, 339, 249, 339, 448, 255];   
     
     
-    
+     
+function myDitchVideo(){
+// not yet fully stopping webcam
+}    
     
     
 function isMobile() {
