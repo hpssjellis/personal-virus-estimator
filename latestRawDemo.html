@@ -92,6 +92,10 @@ limitations under the License.
 </style>
 </head>
 <body onload="{
+
+
+
+
    myStorage1 = localStorage.getItem('myStoredText1')
    if(myStorage1  != null){     
       document.getElementById('myDateTime').value = myStorage1
@@ -100,6 +104,10 @@ limitations under the License.
       myTimeSinceRestart = new Date().getTime()        
       document.getElementById('myDateTime').value = myTimeSinceRestart        
     }
+
+
+
+
     myStorage2 = localStorage.getItem('myStoredText2')
     if(myStorage2  != null){
        document.getElementById('myTotalCount').value = myStorage2  
@@ -108,6 +116,29 @@ limitations under the License.
         myScoreTotal = 0 
         document.getElementById('myTotalCount').value = myScoreTotal
    }
+
+    myStorage3 = localStorage.getItem('myStoredText3')
+    if(myStorage3  != null){
+       document.getElementById('myLastReading').value = myStorage2  
+        yLastAverage =  myStorage3     
+    } else { 
+        myLastAverage = 0 
+        document.getElementById('myLastReading').value = myLastAverage
+   }
+
+
+
+    myStorage4 = localStorage.getItem('myStoredText4')
+    if(myStorage4  != null){
+       document.getElementById('myCameraMode').value = myStorage4  
+        myFacingModeSetting =  myStorage4     
+    } else { 
+        myFacingModeSetting = 'user' 
+        document.getElementById('myCameraMode').value = myFacingModeSetting
+   }
+
+
+
           
 }">
   <div id="main">	
@@ -131,7 +162,7 @@ limitations under the License.
         </div>
 
     
-     <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
+      <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
            </div>
         </div> 
     <h3>This is an estimator not a predictor. Assumes that everyone is contagious. <br>Until science has better information this is nothing better than a game.</h3>
@@ -156,21 +187,47 @@ limitations under the License.
           document.getElementById('myTotalCount').value = myScoreTotal
           localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
           localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)  
+          localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)  
+          localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)  
     }">
-    
+
+
+       <input id="myCameraButton" type=button value="Rear Camera" onclick="{
+       if (myFacingModeSetting == 'user'){ 
+           myFacingModeSetting = 'environment'                                    
+           document.getElementById('myCameraButton').value = 'Front Camera'
+           document.getElementById('myCameraMode').value = myFacingModeSetting
+           localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+           location.reload();
+       } else {
+          myFacingModeSetting = 'user'                                    
+          document.getElementById('myCameraButton').value = 'Rear Camera' 
+          document.getElementById('myCameraMode').value = myFacingModeSetting
+          localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+          location.reload();                            
+       }                                   
+   }"> 
     
     <br>
   <div id="myDiv01">...</div> 
   <div id="myDiv02">...</div>   
     
     DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value"><br>
-    Last Reading: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
     Total Score: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"><br>
+    Last Average: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
+    Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"><br>
     
-    <input type="button" value="Store dateTime and Total Count" onClick="{
+    <input type="button" value="Local Store Values" onClick="{
    localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
    localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)
-   alert('DateTime =' + document.getElementById('myDateTime').value +'\n\nTotal Count='+ document.getElementById('myTotalCount').value +' \n\nHas been stored')
+   localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)
+   localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+   alert('DateTime =' + document.getElementById('myDateTime').value +
+        '\n\nTotal Count='+ document.getElementById('myTotalCount').value +
+        '\n\nLast Reading='+ document.getElementById('myLastReading').value +
+        '\n\nCamera Mode='+ document.getElementById('myCameraMode').value +
+        '\n\nHas been stored, now resetting App')
+   location.reload()
 }">
     
 </body>
@@ -230,8 +287,8 @@ let myReductionPerInterval = 100  // number of virus you can expell per second. 
 
 let myMax10Score = 0
 let myMaxWaitScore = 0
-
-
+let myLastAverage
+let myFacingModeSetting = 'user'
 
 
 
@@ -457,7 +514,7 @@ async function setupCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({
     'audio': false,
     'video': {
-      facingMode: 'user',
+      facingMode: myFacingModeSetting,
       // Only setting the video to a specified size in order to accommodate a
       // point cloud, so on mobile devices accept the default size.
       width: mobile ? undefined : VIDEO_SIZE,
@@ -492,7 +549,7 @@ async function renderPrediction() {
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
       
-        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: 0'
+        document.getElementById('myDivNow').innerHTML = '0'
         document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
