@@ -170,13 +170,15 @@ limitations under the License.
     <input id="myOffButton" type=button value="Turn Video Off" onclick="{
        if (myStopApp){ 
           myStopApp = false                                      
-         document.getElementById('video').play()
-         renderPrediction();
+        // document.getElementById('video').play()
+        // renderPrediction();
          document.getElementById('myOffButton').value = 'Turn Video Off'
+         location.reload()
        } else {
             myStopApp = true
             document.getElementById('video').pause()
-            document.getElementById('myOffButton').value = 'Turn Video On'                                   
+            document.getElementById('myOffButton').value = 'Turn Video On'
+            myDitchVideo()                                   
        }                                   
    }">
     
