@@ -195,7 +195,7 @@ limitations under the License.
        }                                   
    }">
     
-    <input type=button value="Reset App" onclick="{
+    <input type=button value="Reset Total Score to Zero" onclick="{
           myScoreTotal = 0      
           myTimeSinceRestart = new Date().getTime()
           document.getElementById('myDateTime').value =  myTimeSinceRestart
@@ -225,9 +225,10 @@ limitations under the License.
     
     <br>    <br>
   <div id="myDiv01">...</div> 
-  <div id="myDiv02">...</div>   
+  <div id="myDiv02">...</div> <br>
+    <h4>Variables that must be saved and reloaded from local storage</h4>
     
-    DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value"><br>
+    DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value" Title = "Milliseconds since January 1st of 1970 UTC"><br>
     Total Score: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"><br>
     Last Average: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
     Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"><br>
