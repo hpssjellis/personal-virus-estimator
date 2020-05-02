@@ -468,7 +468,7 @@ let myFacingModeSetting = 'user'
      
 function myDitchVideo(){
 let tracks = window.localstream.getTracks();
- let video = document.querySelector('#video');
+ let myVideo = document.querySelector('#video');
  tracks.forEach(function(track) {
      if (track.kind === 'video') {
          if (track.enabled) {
@@ -477,7 +477,7 @@ let tracks = window.localstream.getTracks();
          }
      }
  });
- video.srcObject = null;
+ myVideo.srcObject = null;
 }    
     
     
