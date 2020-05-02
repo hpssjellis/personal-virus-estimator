@@ -92,6 +92,10 @@ limitations under the License.
 </style>
 </head>
 <body onload="{
+
+
+
+
    myStorage1 = localStorage.getItem('myStoredText1')
    if(myStorage1  != null){     
       document.getElementById('myDateTime').value = myStorage1
@@ -100,6 +104,10 @@ limitations under the License.
       myTimeSinceRestart = new Date().getTime()        
       document.getElementById('myDateTime').value = myTimeSinceRestart        
     }
+
+
+
+
     myStorage2 = localStorage.getItem('myStoredText2')
     if(myStorage2  != null){
        document.getElementById('myTotalCount').value = myStorage2  
@@ -108,6 +116,29 @@ limitations under the License.
         myScoreTotal = 0 
         document.getElementById('myTotalCount').value = myScoreTotal
    }
+
+    myStorage3 = localStorage.getItem('myStoredText3')
+    if(myStorage3  != null){
+       document.getElementById('myLastReading').value = myStorage2  
+        yLastAverage =  myStorage3     
+    } else { 
+        myLastAverage = 0 
+        document.getElementById('myLastReading').value = myLastAverage
+   }
+
+
+
+    myStorage4 = localStorage.getItem('myStoredText4')
+    if(myStorage4  != null){
+       document.getElementById('myCameraMode').value = myStorage4  
+        myFacingModeSetting =  myStorage4     
+    } else { 
+        myFacingModeSetting = 'user' 
+        document.getElementById('myCameraMode').value = myFacingModeSetting
+   }
+
+
+
           
 }">
   <div id="main">	
@@ -156,6 +187,8 @@ limitations under the License.
           document.getElementById('myTotalCount').value = myScoreTotal
           localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
           localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)  
+          localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)  
+          localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)  
     }">
     
     
@@ -166,7 +199,7 @@ limitations under the License.
     DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value"><br>
     Total Score: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"><br>
     Last Average: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
-    Total Score: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"><br>
+    Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"><br>
     
     <input type="button" value="Local Store Values" onClick="{
    localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
