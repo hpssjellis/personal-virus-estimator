@@ -92,8 +92,6 @@ limitations under the License.
 </style>
 </head>
 <body onload="{
-
-
    myStorage1 = localStorage.getItem('myStoredText1')
    if(myStorage1  != null){     
       document.getElementById('myDateTime').value = myStorage1
@@ -102,10 +100,6 @@ limitations under the License.
       myTimeSinceRestart = new Date().getTime()        
       document.getElementById('myDateTime').value = myTimeSinceRestart        
     }
-
-
-
-
     myStorage2 = localStorage.getItem('myStoredText2')
     if(myStorage2  != null){
        document.getElementById('myTotalCount').value = myStorage2  
@@ -114,41 +108,7 @@ limitations under the License.
         myScoreTotal = 0 
         document.getElementById('myTotalCount').value = myScoreTotal
    }
- 
-
-    myStorage3 = localStorage.getItem('myStoredText3')
-    if(myStorage3  != null){
-       document.getElementById('myTotalCount').value = myStorage3  
-         myLastAverage =  myStorage3     
-    } else { 
-        myScoreTotal = 0 
-        document.getElementById('myLastReading').value =  myLastAverage
-   }
- 
-
-
-
-
-    myStorage4 = localStorage.getItem('myStoredText4')
-    if(myStorage4  != null){
-       document.getElementById('myTotalCount').value = myStorage4  
-        myFacingModeSetting =  myStorage4   
-        if (myFacingModeSetting == 'user'){document.getElementById('myCameraButton').value = 'Rear Camera'} 
-          else {document.getElementById('myCameraButton').value = 'Front Camera}
-        
-    } else { 
-        myScoreTotal = 'user' 
-        document.getElementById('myCameraMode').value = myFacingModeSetting
-        document.getElementById('myCameraButton').value = 'Rear Camera'
-   }
- 
-
-
-
-
-
-
-         
+          
 }">
   <div id="main">	
     <div class="container">        	
@@ -171,7 +131,7 @@ limitations under the License.
         </div>
 
     
-     <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
+      Virus' per second: <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
            </div>
         </div> 
     <h3>This is an estimator not a predictor. Assumes that everyone is contagious. <br>Until science has better information this is nothing better than a game.</h3>
@@ -188,28 +148,6 @@ limitations under the License.
             document.getElementById('myOffButton').value = 'Turn Video On'                                   
        }                                   
    }">
-
-
-
-    <input id="myCameraButton" type=button value="Rear Camera" onclick="{
-       if (myFacingModeSetting == 'user'){ 
-           myFacingModeSetting = 'environment'                                    
-           document.getElementById('myCameraButton').value = 'Front Camera'
-           document.getElementById('myCameraMode').value = myFacingModeSetting
-           localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
-           location.reload();
-       } else {
-          myFacingModeSetting = 'user'                                    
-          document.getElementById('myCameraButton').value = 'Rear Camera' 
-          document.getElementById('myCameraMode').value = myFacingModeSetting
-          localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
-          location.reload();                            
-       }                                   
-   }">
-
-
-
-
     
     <input type=button value="Reset App" onclick="{
           myScoreTotal = 0      
@@ -226,9 +164,9 @@ limitations under the License.
   <div id="myDiv02">...</div>   
     
     DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value"><br>
-    Total SCore: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"><br>
-    Last Reading: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
-    Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "Camera facing"><br>
+    Total Score: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"><br>
+    Last Average: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
+    Total Score: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"><br>
     
     <input type="button" value="Store dateTime and Total Count" onClick="{
    localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
@@ -301,8 +239,6 @@ let myReductionPerInterval = 100  // number of virus you can expell per second. 
 let myMax10Score = 0
 let myMaxWaitScore = 0
 let myLastAverage
-
-
 let myFacingModeSetting = 'user'
 
 
@@ -478,21 +414,8 @@ let myFacingModeSetting = 'user'
     420, 363, 361, 401, 288, 265, 372, 353, 390, 339, 249, 339, 448, 255];   
     
     
-function ditchVideo(){
-
-let tracks = window.localstream.getTracks();
- let video = document.querySelector('#your-video-tag-id');
- tracks.forEach(function(track) {
-     if (track.kind === 'video') {
-         if (track.enabled) {
-             track.stop();
-             track.enabled = false; 
-         }
-     }
- });
- video.srcObject = null;
-
-}    
+    
+    
     
 function isMobile() {
   const isAndroid = /Android/i.test(navigator.userAgent);
@@ -577,7 +500,7 @@ async function renderPrediction() {
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
       
-        document.getElementById('myDivNow').innerHTML = 'Virus\' per second: 0'
+        document.getElementById('myDivNow').innerHTML = '0'
         document.getElementById('myDivTotal').innerHTML = 'Total Virus Now: ' + myScoreTotal.toFixed(0) + '<br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
