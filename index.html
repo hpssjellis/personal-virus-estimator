@@ -463,7 +463,20 @@ let myFacingModeSetting = 'user'
     420, 363, 361, 401, 288, 265, 372, 353, 390, 339, 249, 339, 448, 255];   
     
     
-    
+     
+function myDitchVideo(){
+let tracks = window.localstream.getTracks();
+ let video = document.querySelector('#video');
+ tracks.forEach(function(track) {
+     if (track.kind === 'video') {
+         if (track.enabled) {
+             track.stop();
+             track.enabled = false; 
+         }
+     }
+ });
+ video.srcObject = null;
+}    
     
     
 function isMobile() {
