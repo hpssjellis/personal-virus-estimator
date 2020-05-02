@@ -132,10 +132,14 @@ limitations under the License.
     myStorage4 = localStorage.getItem('myStoredText4')
     if(myStorage4  != null){
        document.getElementById('myTotalCount').value = myStorage4  
-        myFacingModeSetting =  myStorage4     
+        myFacingModeSetting =  myStorage4   
+        if (myFacingModeSetting == 'user'){document.getElementById('myCameraButton').value = 'Rear Camera'} 
+          else {document.getElementById('myCameraButton').value = 'Front Camera}
+        
     } else { 
         myScoreTotal = 'user' 
         document.getElementById('myCameraMode').value = myFacingModeSetting
+        document.getElementById('myCameraButton').value = 'Rear Camera'
    }
  
 
