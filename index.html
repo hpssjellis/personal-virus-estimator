@@ -234,7 +234,7 @@ limitations under the License.
     Last Average: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
     Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"><br>
     
-    <input type="button" value="Local Store Values" onClick="{
+    <input type="button" value="Store the above, might want to pause the app first" onClick="{
    localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
    localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)
    localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)
@@ -248,6 +248,27 @@ limitations under the License.
  */                                                            
    location.reload()
 }">
+ 
+    
+    <hr>
+    <h4>Variables that are saved only if you change them</h4>  
+    
+    
+    
+   
+
+    <hr>
+    <h4>Known Issues with this version of the Machine Learning Model</h4>
+    <ul>
+        <li> If people are facing away from you, but a breeze is flowing towards you. No detection since no face is visible
+        <li> Small faces will be analysed as slightly father away than large faces. 
+            Kids are detected as slightly father away than adults. 
+        <li> Infection Viral load and Viral Reduction per second are just a guess at the moment.
+        <li> Effectiveness of homemade multilayer cloth masks for personal protection has very little scientific support at the moment 
+            (Effectiveness for source control of even single layer homemade mask is presently highly suported as of April 2020)  
+            Source control for N95 masks with valves is a hot topic at the moment (May 2020). N95 masks with unfiltered exhale valves 
+            give personal protection at 95% but no source control protection. Not all N95 respirators have unfiltered exhaust valves.
+    </ul>
     
 </body>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script> -->
