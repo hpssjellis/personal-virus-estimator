@@ -94,7 +94,7 @@ limitations under the License.
 <body onload="{
 
 
-
+////////////////////////////// local Stroage that must be reset if not found ///////////////////////////////////////
 
    myStorage1 = localStorage.getItem('myStoredText1')
    if(myStorage1  != null){     
@@ -133,14 +133,24 @@ limitations under the License.
        document.getElementById('myCameraMode').value = myStorage4  
         myFacingModeSetting =  myStorage4     
     } else { 
-        myFacingModeSetting = 'user' 
+        myFacingModeSetting = 'user' // only during testing
         document.getElementById('myCameraMode').value = myFacingModeSetting
    }
 
-
+ ///////////////////////////////// local storage that unless saved is updated by newer versions of the app.//////////////////////              
+ 
+              
+              
+              
+              
+              
+              
+////////////////////////////////////// end local storage loading     /////////////////////////////////////////////         
 
           
-}">
+}">   //  end onload body function
+    
+    
   <div id="main">	
     <div class="container">        	
       <div class="canvas-wrapper">
@@ -466,6 +476,7 @@ let myFacingModeSetting = 'user'
     453, 465, 343, 357, 412, 437, 343, 399, 344, 360, 440, 420, 437, 456, 360,
     420, 363, 361, 401, 288, 265, 372, 353, 390, 339, 249, 339, 448, 255];   
     
+     
     
      
 function myDitchVideo(){
