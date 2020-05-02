@@ -190,14 +190,16 @@ limitations under the License.
     <input id="myCameraButton" type=button value="Rear Camera" onclick="{
        if (myFacingModeSetting == 'user'){ 
            myFacingModeSetting = 'environment'                                    
-          document.getElementById('myCameraButton').value = 'Front Camera'
-          ditchVideo()
-          main();
+           document.getElementById('myCameraButton').value = 'Front Camera'
+           document.getElementById('myCameraMode').value = myFacingModeSetting
+           localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+           location.reload();
        } else {
           myFacingModeSetting = 'user'                                    
           document.getElementById('myCameraButton').value = 'Rear Camera' 
-          ditchVideo() 
-          main();                               
+          document.getElementById('myCameraMode').value = myFacingModeSetting
+          localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+          location.reload();                            
        }                                   
    }">
 
