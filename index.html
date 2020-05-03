@@ -126,7 +126,7 @@ limitations under the License.
         const myElapse =  ( myNow -  myTimeSinceRestart)/1000
         const myExtraScore =   myElapse * myLastAverage    
         console.log(myExtraScore)   // seconds since last app load
-        myScoreTotal +=  myExtraScore                     // calculates if count same for duration of break          
+        myScoreTotal = parseFloat(myScoreTotal) + parseFloat(myExtraScore)                     // calculates if count same for duration of break          
         console.log(myScoreTotal)          
         console.log()      
         document.getElementById('myTotalCount').value = myScoreTotal
