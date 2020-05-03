@@ -327,7 +327,7 @@ limitations under the License.
 //Global Variables
 let myScoreNow = 0
 let myScoreTotal 
-let myPersonMultiplier = 50
+let myPersonMultiplier = 50   // theoretically different for each person default set at 50. Lower means better defending virus
 
 let myStopApp = false
 let myDistanceCutoff = 10 // 50  // Distance in pixels that a facewidth is not relevant  close = 600-200  
@@ -340,7 +340,7 @@ let myDoSet = true                // for calculating all people not just the fir
 
 
 let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on 1 second intervals
-let myReductionPerInterval = 60  // number of virus you can expell per second. This is important, probably fairly low
+let myReductionPerInterval = 200  // number of virus you can expell per second. This is important, probably fairly low
 
 
 let myMax10Score = 0
