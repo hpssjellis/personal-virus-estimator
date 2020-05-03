@@ -121,8 +121,10 @@ limitations under the License.
     if(myStorage3  != null){
        document.getElementById('myLastReading').value = myStorage3  
         myLastAverage =  myStorage3 
+        console.log('myLastAverage')      
+        console.log(myLastAverage)      
         console.log('myScoreTotal old')      
-        console.log(myScoreTotal)      
+        console.log(myScoreTotal)         
         const myNow =  new Date().getTime() 
         const myElapse =  ( myNow -  myTimeSinceRestart)/1000
         console.log('myElapse')
