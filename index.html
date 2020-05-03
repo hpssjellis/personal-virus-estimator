@@ -121,13 +121,18 @@ limitations under the License.
     if(myStorage3  != null){
        document.getElementById('myLastReading').value = myStorage3  
         myLastAverage =  myStorage3 
+        console.log('myScoreTotal old')      
         console.log(myScoreTotal)      
         const myNow =  new Date().getTime() 
         const myElapse =  ( myNow -  myTimeSinceRestart)/1000
+        console.log'(myElapse')
+        console.log(myElapse)
         const myExtraScore =   myElapse * myLastAverage    
+        console.log('myExtraScore')  
         console.log(myExtraScore)   // seconds since last app load
         myScoreTotal = parseFloat(myScoreTotal) + parseFloat(myExtraScore)                     // calculates if count same for duration of break          
-        console.log(myScoreTotal)          
+        console.log('myScoreTotal new')            
+        console.log(myScoreTotal)                
         console.log()      
         document.getElementById('myTotalCount').value = myScoreTotal
     } else { 
