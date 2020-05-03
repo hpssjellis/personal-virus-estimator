@@ -349,7 +349,9 @@ let myLastAverage
 let myFacingModeSetting = 'user'
 
 
-    
+let myToRed = 200000   // loosely airborne RNA load for average person to get infected. Please help me science 
+let myToOrange = 60000 // Loosely airborne RNA to get concerned. Please help me science
+let myFontColor = 'green'    
      
 function myDitchVideo(){
 // not yet fully stopping webcam
@@ -438,9 +440,12 @@ async function renderPrediction() {
           // console.log(myScoreTotal)
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
+        myFontColor = 'green'
+        if (myScoreTotal > myToRed) {myFontColor = 'red'}
+        if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
       
         document.getElementById('myDivNow').innerHTML = '0'
-        document.getElementById('myDivTotal').innerHTML = 'Total SDS: ' + myScoreTotal.toFixed(0) + '<br>' 
+        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:blue;> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
@@ -504,7 +509,7 @@ async function renderPrediction() {
        
         myScoreTotal += myScoreNow               
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(0) 
-        document.getElementById('myDivTotal').innerHTML = 'Total SDS: ' + myScoreTotal.toFixed(0)+  '<br>' 
+        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:blue;> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>'
         document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
 
