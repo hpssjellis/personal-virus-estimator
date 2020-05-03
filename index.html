@@ -605,6 +605,8 @@ async function renderPrediction() {
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
         localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
         localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
+      
+        document.getElementById('myLastReading').value =  0
         localStorage.setItem('myStoredText3', 0) 
       
   }
@@ -626,7 +628,7 @@ async function renderPrediction() {
         const keypoints = prediction.scaledMesh;
      // console.log(keypoints[234])
       
-      // myTimeSinceRestart = new Date().getTime()
+      // myTimeSinceRestart = new Date().getTime()    // checking if a second has passed
        let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
        if (elapsedTime >= myDetectionInterval){  
           myDoSet = true; 
