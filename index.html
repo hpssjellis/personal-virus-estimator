@@ -445,7 +445,7 @@ async function renderPrediction() {
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
       
         document.getElementById('myDivNow').innerHTML = '0'
-        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:blue;> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>' 
+        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
@@ -483,7 +483,7 @@ async function renderPrediction() {
          document.getElementById('myDiv01').innerHTML = ''
          myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
          if (myScoreTotal < 0){myScoreTotal = 0}  
-          
+
           // backing up to local storage 
           document.getElementById('myDateTime').value =  myTimeSinceRestart
           document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
@@ -507,9 +507,13 @@ async function renderPrediction() {
         myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
         myMax10Score += myScoreNow
        
-        myScoreTotal += myScoreNow               
+        myScoreTotal += myScoreNow   
+        myFontColor = 'green'
+        if (myScoreTotal > myToRed) {myFontColor = 'red'}
+        if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
+         
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(0) 
-        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:blue;> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>'
+        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>'
         document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
 
