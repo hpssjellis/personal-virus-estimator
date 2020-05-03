@@ -348,7 +348,7 @@ let myMaxWaitScore = 0
 let myLastAverage
 let myFacingModeSetting = 'user'
 
-
+/*
 
  const TRIANGULATION = [
     127, 34, 139, 11, 0, 37, 232, 231, 120, 72, 37, 39, 128, 121, 47, 232, 121,
@@ -520,7 +520,7 @@ let myFacingModeSetting = 'user'
     453, 465, 343, 357, 412, 437, 343, 399, 344, 360, 440, 420, 437, 456, 360,
     420, 363, 361, 401, 288, 265, 372, 353, 390, 339, 249, 339, 448, 255];   
     
-     
+   */  
     
      
 function myDitchVideo(){
@@ -700,6 +700,9 @@ async function renderPrediction() {
         
         
       if (state.triangulateMesh) {
+          
+         /* 
+          
         for (let i = 0; i < TRIANGULATION.length / 3; i++) {
           const points = [
             TRIANGULATION[i * 3], TRIANGULATION[i * 3 + 1],
@@ -708,6 +711,9 @@ async function renderPrediction() {
 
           drawPath(ctx, points, true);
         }
+          
+         */ 
+          
       } else {
         for (let i = 0; i < keypoints.length; i++) {
           const x = keypoints[i][0];
