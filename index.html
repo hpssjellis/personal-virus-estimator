@@ -123,8 +123,9 @@ limitations under the License.
         myLastAverage =  myStorage3  
         const myNow =  new Date().getTime() 
         const myElapse =  ( myNow -  myTimeSinceRestart)/1000
-        console.log(myElapse)   // seconds since last app load
-        myScoreTotal +=  myElapse * myLastAverage                      // calculates if count same for duration of break
+        const myExtraScore =   myElapse * myLastAverage    
+        console.log(myExtraScore)   // seconds since last app load
+        myScoreTotal +=  myExtraScore                     // calculates if count same for duration of break
         document.getElementById('myTotalCount').value = myScoreTotal
     } else { 
         myLastAverage = 0 
