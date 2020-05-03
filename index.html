@@ -120,7 +120,10 @@ limitations under the License.
     myStorage3 = localStorage.getItem('myStoredText3')
     if(myStorage3  != null){
        document.getElementById('myLastReading').value = myStorage3  
-        myLastAverage =  myStorage3     
+        myLastAverage =  myStorage3  
+              
+        myScoreTotal +=  = (new Date().getTime() -  myTimeSinceRestart) * myLastAverage // calculates if count same for duration of break
+        document.getElementById('myTotalCount').value = myScoreTotal
     } else { 
         myLastAverage = 0 
         document.getElementById('myLastReading').value = myLastAverage
@@ -149,7 +152,7 @@ limitations under the License.
 
           
 }">   
-    <h1 align=center>Social Distancing Artificial Intelligence Web App</h1>  
+    <h3 align=center >Social Distancing Artificial Intelligence Web App</h3>  
     
   <div id="main">	
     <div class="container">        	
@@ -602,6 +605,7 @@ async function renderPrediction() {
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
         localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
         localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
+        localStorage.setItem('myStoredText3', 0) 
       
   }
   if (predictions.length > 0) {
@@ -664,6 +668,8 @@ async function renderPrediction() {
         // need to save this new total score
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)  
         localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
+        document.getElementById('myLastReading').value =   myMax10Score 
+        localStorage.setItem('myStoredText3', myMax10Score) 
 
 
 
