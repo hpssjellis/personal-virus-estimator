@@ -330,7 +330,7 @@ let myScoreTotal
 let myPersonMultiplier = 50
 
 let myStopApp = false
-let myDistanceCutoff = 50   // Distance in pixels that a facewidth is not relevant  close = 600-200  
+let myDistanceCutoff = 10 // 50  // Distance in pixels that a facewidth is not relevant  close = 600-200  
 let myMouthOpenCutoff = 0.03
 
 let myTimeSinceRestart 
@@ -349,8 +349,8 @@ let myLastAverage
 let myFacingModeSetting = 'user'
 
 
-let myToRed = 200000   // loosely airborne RNA load for average person to get infected. Please help me science 
-let myToOrange = 60000 // Loosely airborne RNA to get concerned. Please help me science
+let myToRed = 80000   // loosely airborne RNA load for average person to get infected. Please help me science 
+let myToOrange = 40000 // Loosely airborne RNA to get concerned. Please help me science
 let myFontColor = 'green'    
      
 function myDitchVideo(){
@@ -441,8 +441,8 @@ async function renderPrediction() {
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
         myFontColor = 'green'
-        if (myScoreTotal > myToRed) {myFontColor = 'red'}
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
+        if (myScoreTotal > myToRed) {myFontColor = 'red'}
       
         document.getElementById('myDivNow').innerHTML = '0'
         document.getElementById('myDivTotal').innerHTML = '<h1 style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>' 
@@ -509,8 +509,8 @@ async function renderPrediction() {
        
         myScoreTotal += myScoreNow   
         myFontColor = 'green'
-        if (myScoreTotal > myToRed) {myFontColor = 'red'}
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
+        if (myScoreTotal > myToRed) {myFontColor = 'red'}
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(0) 
         document.getElementById('myDivTotal').innerHTML = '<h1 style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>'
