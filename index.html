@@ -122,7 +122,7 @@ limitations under the License.
        document.getElementById('myLastReading').value = myStorage3  
         myLastAverage =  myStorage3  
               
-        myScoreTotal +=  (new Date().getTime() -  myTimeSinceRestart) * myLastAverage // calculates if count same for duration of break
+        myScoreTotal +=  (new Date().getTime() -  myTimeSinceRestart)/1000 * myLastAverage // calculates if count same for duration of break
         document.getElementById('myTotalCount').value = myScoreTotal
     } else { 
         myLastAverage = 0 
