@@ -234,7 +234,7 @@ limitations under the License.
     <input id="myInsideRadio" type=radio name="myBiomeRadioName" Checked> <-- Inside, 
     Outside --> <input id="myOutsideRadio" type=radio name="myBiomeRadioName"><br>
     
-    Breeze: <select id="myBreezeSelection" onChange = "{
+    Breeze: <select id="myBreezeSelect" onChange = "{
        if (this.value == '0'){
            document.getElementById('myBreezeButton').style.visibility = 'hidden'
        } else {      
@@ -667,15 +667,24 @@ async function renderPrediction() {
        } else {      // outside
            myBiomeMultiplier = myOutsideMultiplier   
        }    
-        console.log('myBiomeMultiplier')   
-        console.log(myBiomeMultiplier)   
            
            
            
            
-       // if (){}      // Breeze
+        if (document.getElementById('myBreezeSelect').value == 0){
+          myBreezeMultiplier   = 1
+        } else {
+          myBreezeMultiplier   = 4     
+        }   
            
-        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myBiomeMultiplier
+        console.log('myBreezeMultiplier')   
+        console.log(myBreezeMultiplier)   
+           
+           
+           
+           
+           
+        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myBiomeMultiplier * myBreezeMultiplier
         myMax10Score += myScoreNow
        
         myScoreTotal += myScoreNow   
