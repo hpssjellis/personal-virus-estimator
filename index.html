@@ -234,13 +234,13 @@ limitations under the License.
     }"
     <option value='0'> </option>
     <option value='0'>No Breeze</option>
-    <option value='1'>Level 1</option>
+    <option value='1' checked>Level 1</option>
     <option value='2'>Level 2</option>
     <option value='3'>Level 3</option>
     </select><br>
      
     
-    <input id="myBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:hidden; width:100px; height:30px; left:30px; top:250px"  onTouchStart="{
+    <input id="myBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:visible; width:100px; height:30px; left:30px; top:250px"  onTouchStart="{
        this.onMouseOver(); event.preventDefault();
     }"  onMouseOver="{
         document.getElementById('myBreezeButton').style.backgroundColor = 'green'
