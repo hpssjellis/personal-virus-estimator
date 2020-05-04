@@ -1,6 +1,5 @@
 
 
-
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -148,7 +147,15 @@ limitations under the License.
     myStorage4 = localStorage.getItem('myStoredText4')
     if(myStorage4  != null){
        document.getElementById('myCameraMode').value = myStorage4  
-        myFacingModeSetting =  myStorage4     
+      // document.getElementById('myCameraMode').value = myFacingModeSetting
+       myFacingModeSetting =  myStorage4 
+         if (myStorage4 == 'user'){
+           document.getElementById('myCameraButton').value = 'Rear Camera'  // button says read camera since front working                      
+         } else {
+           document.getElementById('myCameraButton').value = 'Front Camera'                         
+        }                          
+                                   
+                                   
     } else { 
         myFacingModeSetting = 'user' // only during testing
         document.getElementById('myCameraMode').value = myFacingModeSetting
