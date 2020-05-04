@@ -347,7 +347,7 @@ limitations under the License.
 
 
 
-
+   Inside Multiplier = 1.00<br>
    Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 onChange="{
        myOutsideMultiplier = this.value
        localStorage.setItem('myStoreOutside',  this.value) 
@@ -355,10 +355,21 @@ limitations under the License.
    }"> 
    <input type=button value="Default" onclick="{
       localStorage.removeItem('myStoreOutside')   
-      // document.getElementById('myOutsideText').style.backgroundcolor='grey'
+      location.reload()
+   }"><br><br>
+
+
+
+   no Breeze Multiplier = 1.00<br>
+   Outside Level1: <input id="myOutsideLevel1" type=text value = 1.5 size=5 onChange="{
+       myOutsideLevel1Multiplier = this.value
+       localStorage.setItem('myStoreOutsideLevel1',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreOutsideLevel1')   
       location.reload()
    }"><br>
-
 
 
 
@@ -451,7 +462,18 @@ let myFontColor = 'green'
 
 let myOutsideMultiplier = 0.20
 let myBiomeMultiplier = 1
-let myBreeze = 1
+
+
+let myBreezeMultiplier = 1
+
+let myOutsideLevel1Multiplier
+let myOutsideLevel2Multiplier
+let myOutsideLevel3Multiplier
+
+
+let myInsideLevel1Multiplier
+let myInsideLevel2Multiplier
+let myInsideLevel3Multiplier
 
 
 
@@ -619,14 +641,20 @@ async function renderPrediction() {
         if (myMouthShut < 1 ){myMouthShut = 1}       
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
         
-       if (document.getElementById('myOutsideRadio').checked){
+           
+           
+       if (document.getElementById('myInsideRadio').checked){
            myBiomeMultiplier = 1
-       } else {      // outside or inside
+       } else {      // outside
            myBiomeMultiplier = myOutsideMultiplier   
        }    
         console.log('myBiomeMultiplier')   
         console.log(myBiomeMultiplier)   
-        // if (){}      // Breeze
+           
+           
+           
+           
+       // if (){}      // Breeze
            
         myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myBiomeMultiplier
         myMax10Score += myScoreNow
