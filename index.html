@@ -240,13 +240,15 @@ limitations under the License.
     </select><br>
      
     
-    <input id="myBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:hidden; width:100px; height:30px; left:30px; top:250px" onMouseOver="{
+    <input id="myBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:hidden; width:100px; height:30px; left:30px; top:250px"  onTouchStart="{
+       this.onMouseOver(); event.preventDefault();
+    }"  onMouseOver="{
         document.getElementById('myBreezeButton').style.backgroundColor = 'green'
-    }" onMouseOut="{
+    }"  onTouchEnd="{
+        this.onMouseOut(); event.preventDefault();
+    }"  onMouseOut="{
         document.getElementById('myBreezeButton').style.backgroundColor = 'lightgrey'    
-    }" onclick="{
-      alert('nothing set yet')                                                                           
-    }"
+    }" 
     <br><br>
     
     <!--    --------------------------- main Buttons ----------------------------------- -->
