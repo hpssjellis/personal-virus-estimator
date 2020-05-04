@@ -550,10 +550,7 @@ function drawPath(ctx, points, closePath) {
 
 let model, ctx, videoWidth, videoHeight, video, canvas,
     scatterGLHasInitialized = false, scatterGL;
-  // Only for rear camera  
-  ctx.translate(videoWidth, 0);
-  ctx.scale(-1, 1); 
-    
+
 const VIDEO_SIZE = 500;
 const mobile = isMobile();
 // Don't render the point cloud on mobile in order to maximize performance and
@@ -791,8 +788,13 @@ async function main() {
   canvasContainer.style = `width: ${videoWidth}px; height: ${videoHeight}px`;
 
   ctx = canvas.getContext('2d');
-  ctx.translate(canvas.width, 0);
-  ctx.scale(-1, 1);
+    
+  if (myFacingModeSetting == 'user'){   // flip the horizontal
+     ctx.translate(canvas.width, 0);
+     ctx.scale(-1, 1);
+  } 
+    
+    
   ctx.fillStyle = '#32EEDB';
   ctx.strokeStyle = '#32EEDB';
   ctx.lineWidth = 0.5;
