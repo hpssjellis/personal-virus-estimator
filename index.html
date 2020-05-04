@@ -450,6 +450,8 @@ let myFontColor = 'green'
 
 
 let myOutsideMultiplier = 0.20
+let myBiomeMultiplier = 1
+let myBreeze = 1
 
 
 
@@ -616,6 +618,14 @@ async function renderPrediction() {
            
         if (myMouthShut < 1 ){myMouthShut = 1}       
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
+        
+       if (document.getElementById('myOutsideRadio').checked){
+           myBiomeMultiplier = 1
+       } else {      // outside or inside
+           myBiomeMultiplier = myOutsideMultiplier   
+       }    
+           
+        // if (){}      // Breeze
            
         myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
         myMax10Score += myScoreNow
