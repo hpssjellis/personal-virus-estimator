@@ -87,6 +87,12 @@ limitations under the License.
     position: absolute;
   }
     
+  /* For Rear camera flip horizontal */  
+  video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+    
     
     
 </style>
@@ -593,6 +599,10 @@ async function renderPrediction() {
 
   const predictions = await model.estimateFaces(video);
    // console.log(predictions[0].faceInViewConfidence)
+  // to flip horizontal  
+  ctx.translate(videoWidth, 0);
+  ctx.scale(-1, 1);
+    
   ctx.drawImage(
       video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
 
