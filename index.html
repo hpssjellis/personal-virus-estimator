@@ -315,13 +315,17 @@ limitations under the License.
     <input type=button value="Clear ALL Local Stored variables" onClick="{
       if (confirm("Clear all the variables you have stored, resetting App to defualts?")) {
           window.localStorage.clear(); 
-          alert('Cleared all Local Storage')                         
-      } else {
-      }                                                                 
+          alert('Cleared all Local Storage, now reloading App') 
+          location.reload()
+      }                                                                
                                                                          
                                                                    
-    }">
+    }"><br>
     
+
+   <input type=button value="Delete myStoredText1" onclick="{
+      localStorage.removeItem('myStoredText1')                                           
+   }"><br>
    
 
     <hr>
