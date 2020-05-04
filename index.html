@@ -531,7 +531,7 @@ async function renderPrediction() {
         // need to save this new total score
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)  
         localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
-        document.getElementById('myLastReading').value =   myMax10Score 
+        document.getElementById('myLastReading').value =   myMax10Score.toFixed(0) 
         localStorage.setItem('myStoredText3', myMax10Score) 
 
 
