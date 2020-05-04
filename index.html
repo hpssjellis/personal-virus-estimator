@@ -694,7 +694,7 @@ async function renderPrediction() {
         else if (document.getElementById('myBreezeSelect').value == 3){
            myBreezeMultiplier   = parseFloat(document.getElementById('myBreezeLevel3').value)
         }            
-      }    
+      }  else {  myBreezeMultiplier   = 1}  
            
               
         console.log('myFacingBreeze') 
