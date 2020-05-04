@@ -214,15 +214,17 @@ limitations under the License.
     <input id="myInsideRadio" type=radio name="myBiomeRadioName" Checked> <-- Inside, 
     outside --> <input id="myOutsideRadio" type=radio name="myBiomeRadioName"><br>
     
-    Breeze: None: <input id="myBreezeRadioNone" type=radio name="myWindRadioName checked" onChange="{
-         
-      alert()   
-    }">, 
-            Level 1: <input id="myBreezeRadioLevel1" type=radio name="myWindRadioName">, 
-            Level 2: <input id="myBreezeRadioLevel2" type=radio name="myWindRadioName">, 
-            Level 3: <input id="myBreezeRadioLevel3" type=radio name="myWindRadioName">, 
+    Breeze: <select id="myBreeze select" onchange = {
+       alert()
+    }
+    <option value='0'>No Breeze</option>
+    <option value='0'>Level 1</option>
+    <option value='0'>Level 2</option>
+    <option value='0'>Level 3</option>
+    </select>
+     
     
-    <input id="myMoveablBreezeButton" type=button value="Facing Breeze" onclick="{
+    <input id="myMoveablBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:visible width:30px; height:30px; left:30px; top:250px"  onclick="{
       alert()                                                                           
     }"
     <br><br>
