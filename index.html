@@ -333,25 +333,31 @@ limitations under the License.
           window.localStorage.clear(); 
           myScoreTotal = 0   // since retained by the app
           location.reload()
-      }                                                                
-                                                                         
-                                                                   
+      }                                                                                                                                                                                                    
     }"><br>
     
 
 
-   Inside Multiplier = 1, Outside Multiplier: <input id="myOutsideText" type=text value = 0.2 size=5 onChange="{
+
+
+
+
+   Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 onChange="{
        myOutsideMultiplier = this.value
        localStorage.setItem('myStoreOutside') 
-       this.style.backgroundcolor='green'
+       location.reload()
    }"> 
-
-
-   <input type=button value="Reset Default" onclick="{
+   <input type=button value="Reset" onclick="{
       localStorage.removeItem('myStoreOutside')   
        document.getElementById('myOutsideText').style.backgroundcolor='grey'
        location.reload()
    }"><br>
+
+
+
+
+
+
    
 
     <hr>
