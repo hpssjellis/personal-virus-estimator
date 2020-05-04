@@ -87,7 +87,7 @@ limitations under the License.
     position: absolute;
   }
     
- #video {
+ video {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }   
@@ -596,6 +596,11 @@ async function renderPrediction() {
 
   const predictions = await model.estimateFaces(video);
    // console.log(predictions[0].faceInViewConfidence)
+  
+  // Only for rear camera  
+  ctx.translate(videoWidth, 0);
+  ctx.scale(-1, 1); 
+    
   ctx.drawImage(
       video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
 
