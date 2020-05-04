@@ -195,7 +195,25 @@ limitations under the License.
                                          
                                           
                                    
-                                   
+   let myStoreOrangeHere = localStorage.getItem('myStoreOrange')
+   if(myStoreOrangeHere  != null){     
+      document.getElementById('myOrange').value = myStoreOrangeHere
+      myToOrange =   myStoreOrangeHere                           
+      document.getElementById('myOrange').style.backgroundColor = 'green'
+    }   else {
+       document.getElementById('myOrange').value = myToOrange       
+    }
+                                         
+                                    
+   let myStoreRedHere = localStorage.getItem('myStoreRed')
+   if(myStoreRedHere  != null){     
+      document.getElementById('myRed').value = myStoreRedHere
+      myToRed =   myStoreRedHere                           
+      document.getElementById('myOrange').style.backgroundColor = 'green'
+    }    else {  
+      document.getElementById('myRed').value = myToRed        
+    }  
+                                                  
               
               
               
@@ -411,6 +429,30 @@ limitations under the License.
       localStorage.removeItem('myStoreBreezeLevel3')   
       location.reload()
    }"><br>
+
+
+   Orange Setting: <input id="myOrange" type=text value = "" size=5 onChange="{
+       localStorage.setItem('myStoreOrange',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreOrange')   
+      location.reload()
+   }"><br>
+
+   Red Setting: <input id="myRed" type=text value = "" size=5 onChange="{
+       localStorage.setItem('myStoreRed',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreRed')   
+      location.reload()
+   }"><br>
+
+
+
+
+
 
 
    
