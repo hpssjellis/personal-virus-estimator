@@ -550,7 +550,10 @@ function drawPath(ctx, points, closePath) {
 
 let model, ctx, videoWidth, videoHeight, video, canvas,
     scatterGLHasInitialized = false, scatterGL;
-
+  // Only for rear camera  
+  ctx.translate(videoWidth, 0);
+  ctx.scale(-1, 1); 
+    
 const VIDEO_SIZE = 500;
 const mobile = isMobile();
 // Don't render the point cloud on mobile in order to maximize performance and
@@ -597,9 +600,7 @@ async function renderPrediction() {
   const predictions = await model.estimateFaces(video);
    // console.log(predictions[0].faceInViewConfidence)
   
-  // Only for rear camera  
-  ctx.translate(videoWidth, 0);
-  ctx.scale(-1, 1); 
+
     
   ctx.drawImage(
       video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
