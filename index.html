@@ -173,7 +173,16 @@ limitations under the License.
     }   
                                    
                                    
+   
+   let myStoreVar1 = localStorage.getItem('myStoreOutsideLevel1')
+   if(myStoreVar1  != null){     
+      document.getElementById('myOutsideLevel1').value = myStoreVar1
+      document.getElementById('myOutsideLevel1').style.backgroundColor = 'green'
+          myOutsideLevel1Multiplier =  myStoreVar1       
+    }   
                                    
+                                   
+                                          
                                    
                                    
               
@@ -358,10 +367,10 @@ limitations under the License.
       location.reload()
    }"><br><br>
 
-
+<!--  ------------------------------------------ breeze stuff ----------------------------------- -->
 
    no Breeze Multiplier = 1.00<br>
-   Outside Level1: <input id="myOutsideLevel1" type=text value = 1.5 size=5 onChange="{
+   Outside Level 1: <input id="myOutsideLevel1" type=text value = 1.5 size=5 onChange="{
        myOutsideLevel1Multiplier = this.value
        localStorage.setItem('myStoreOutsideLevel1',  this.value) 
        location.reload()
@@ -371,6 +380,16 @@ limitations under the License.
       location.reload()
    }"><br>
 
+
+   Outside Level 2: <input id="myOutsideLevel2" type=text value = 2.5 size=5 onChange="{
+       myOutsideLevel2Multiplier = this.value
+       localStorage.setItem('myStoreOutsideLevel2',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreOutsideLevel2')   
+      location.reload()
+   }"><br>
 
 
 
