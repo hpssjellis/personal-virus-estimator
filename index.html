@@ -350,9 +350,9 @@ limitations under the License.
     <h4>Variables that must be saved and reloaded from local storage</h4>
     
     DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value" Title = "Milliseconds since January 1st of 1970 UTC"><br>
-    Total SDS: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"><br>
-    SDS Now: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
-    Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"><br>
+    Total SDS: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"  title="Combined Social Distance Score" ><br>
+    SDS Now: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"  title="Latest Social Distance Score"><br>
+    Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"   title="Front Camera = user,  Rear Camera = environment"><br>
     
     <input type="button" value="Store the above, might want to pause the app first" onClick="{
    localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
@@ -389,7 +389,7 @@ limitations under the License.
 
 
    Inside Multiplier = 1.00<br>
-   Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 onChange="{
+   Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 title="Less than 1 means less of an issue" onChange="{
        myOutsideMultiplier = this.value
        localStorage.setItem('myStoreOutside',  this.value) 
        location.reload()
@@ -401,7 +401,7 @@ limitations under the License.
 
 <!--  ------------------------------------------ breeze HTML ----------------------------------- -->
 
-   no Breeze Multiplier = 1.00<br>
+   No Breeze Multiplier = 1.00<br>
    Breeze Level 1: <input id="myBreezeLevel1" type=text value = 1.5 size=5 Title="A Thread shows breeze direction" onChange="{
        localStorage.setItem('myStoreBreezeLevel1',  this.value) 
        location.reload()
@@ -431,7 +431,7 @@ limitations under the License.
    }"><br><br>
 
 
-   Orange Setting: <input id="myOrange" type=text value = "" size=5 onChange="{
+   Orange Setting: <input id="myOrange" type=text value = ""  title="Warning amount"  size=5 onChange="{
        localStorage.setItem('myStoreOrange',  this.value) 
        location.reload()
    }"> 
@@ -440,7 +440,7 @@ limitations under the License.
       location.reload()
    }"><br>
 
-   Red Setting: <input id="myRed" type=text value = "" size=5 onChange="{
+   Red Setting: <input id="myRed" type=text value = ""  title="Danger amount" size=5 onChange="{
        localStorage.setItem('myStoreRed',  this.value) 
        location.reload()
    }"> 
