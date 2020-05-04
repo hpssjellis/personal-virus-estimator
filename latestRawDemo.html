@@ -87,7 +87,7 @@ limitations under the License.
     position: absolute;
   }
     
-    
+ 
     
 </style>
 </head>
@@ -320,11 +320,13 @@ limitations under the License.
     
     <br>    <br>
     
-    
-    <!--    ---------------------------  ----------------------------------- -->
-    
-    
+     
+
   <div id="myDiv01">...</div> 
+
+     <hr> <br><br>  <br><br>  <br><br>  <br><br> 
+    <h4>Below here are more advanced setting, most users can ignore.</h4>
+
 <!--  <div id="myDiv02">...</div> --> 
     <br>
     <h4>Variables that must be saved and reloaded from local storage</h4>
@@ -353,7 +355,6 @@ limitations under the License.
     <hr>
     <h5>Variables that are saved only if you change them. Will reload this App</h5>  
     
-    -------- active soon ----------
     
     
     <input type=button value="Clear ALL Local Stored variables" onClick="{
@@ -417,7 +418,7 @@ limitations under the License.
     <hr>
     
     <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>
-    <h5>Known Issues with this version of the Scoial Distance Machine Learning Web App</h5>
+    <h5>Known Issues with this version of the Social Distance Machine Learning Web App</h5>
     <ul>
         <li> <b>Point the camera away from people before closing, otherwise that score will be calculated each second upon re openning the app.
             This issue can be used to determine you average score for the duration you are not moving, like at work or on a bus.</b><br>
@@ -593,6 +594,9 @@ async function renderPrediction() {
 
   const predictions = await model.estimateFaces(video);
    // console.log(predictions[0].faceInViewConfidence)
+  
+
+    
   ctx.drawImage(
       video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
 
@@ -782,8 +786,13 @@ async function main() {
   canvasContainer.style = `width: ${videoWidth}px; height: ${videoHeight}px`;
 
   ctx = canvas.getContext('2d');
-  ctx.translate(canvas.width, 0);
-  ctx.scale(-1, 1);
+    
+  if (myFacingModeSetting == 'user'){   // flip the horizontal
+     ctx.translate(canvas.width, 0);
+     ctx.scale(-1, 1);
+  } 
+    
+    
   ctx.fillStyle = '#32EEDB';
   ctx.strokeStyle = '#32EEDB';
   ctx.lineWidth = 0.5;
