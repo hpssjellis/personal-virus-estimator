@@ -264,10 +264,12 @@ limitations under the License.
        this.onMouseOver(); event.preventDefault();
     }"  onMouseOver="{
         document.getElementById('myBreezeButton').style.backgroundColor = 'green'
+        myFacingBreeze = true             
     }"  onTouchEnd="{
         this.onMouseOut(); event.preventDefault();
     }"  onMouseOut="{
-        document.getElementById('myBreezeButton').style.backgroundColor = 'lightgrey'    
+        document.getElementById('myBreezeButton').style.backgroundColor = 'lightgrey' 
+        myFacingBreeze = false              
     }" 
     <br><br>
     
@@ -500,10 +502,7 @@ let myBiomeMultiplier = 1
 
 
 let myBreezeMultiplier = 1
-
-let myBreezeLevel1Multiplier
-let myBreezeLevel2Multiplier
-let myBreezeLevel3Multiplier
+let myFacingBreeze = false
 
 
 
@@ -682,7 +681,7 @@ async function renderPrediction() {
            
            
            
-           
+     if (myFacingBreeze){    
         if (document.getElementById('myBreezeSelect').value == 0){
            myBreezeMultiplier   = 1
         } 
@@ -695,9 +694,11 @@ async function renderPrediction() {
         else if (document.getElementById('myBreezeSelect').value == 3){
            myBreezeMultiplier   = parseFloat(document.getElementById('myBreezeLevel3').value)
         }            
+      }    
            
-           
-           
+              
+        console.log('myFacingBreeze') 
+        console.log(myFacingBreeze) 
         console.log('myBreezeMultiplier')   
         console.log(myBreezeMultiplier)   
            
