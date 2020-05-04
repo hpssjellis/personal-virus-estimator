@@ -212,10 +212,10 @@ limitations under the License.
     
     
     <input id="myInsideRadio" type=radio name="myBiomeRadioName" Checked> <-- Inside, 
-    outside --> <input id="myOutsideRadio" type=radio name="myBiomeRadioName"><br>
+    outside --> <input id="myOutsideRadio" type=radio name="myBiomeRadioName">
     
-    Breeze: <select id="myBreeze select" onchange = "{
-       alert()
+    Breeze: <select id="myBreezeSelection" onChange = "{
+       alert(this.value)
     }"
     <option value='0'>No Breeze</option>
     <option value='1'>Level 1</option>
@@ -224,7 +224,7 @@ limitations under the License.
     </select><br>
      
     
-    <input id="myMoveablBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:visible width:30px; height:30px; left:30px; top:250px"  onclick="{
+    <input id="myMoveableBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:visible width:30px; height:30px; left:30px; top:250px"  onclick="{
       alert()                                                                           
     }"
     <br><br>
