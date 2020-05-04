@@ -323,7 +323,7 @@ limitations under the License.
  
     
     <hr>
-    <h5>Variables that are saved only if you change them</h5>  
+    <h5>Variables that are saved only if you change them. Will reload this App</h5>  
     
     --------coming soon ----------
     
@@ -347,7 +347,7 @@ limitations under the License.
        localStorage.setItem('myStoreOutside',  this.value) 
        location.reload()
    }"> 
-   <input type=button value="Reset" onclick="{
+   <input type=button value="Default" onclick="{
       localStorage.removeItem('myStoreOutside')   
       // document.getElementById('myOutsideText').style.backgroundcolor='grey'
       location.reload()
