@@ -627,7 +627,7 @@ async function renderPrediction() {
            
         // if (){}      // Breeze
            
-        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier 
+        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myBiomeMultiplier
         myMax10Score += myScoreNow
        
         myScoreTotal += myScoreNow   
