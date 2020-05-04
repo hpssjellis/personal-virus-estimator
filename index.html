@@ -164,7 +164,18 @@ limitations under the License.
  ///////////////////////////////// local storage that unless saved is updated by newer versions of the app.//////////////////////              
  
               
-              
+  
+   let myStoreVar1 = localStorage.getItem('myStoreOutside')
+   if(myStoreVar1  != null){     
+      document.getElementById('myOutsideText').value = myStoreVar1
+      document.getElementById('myOutsideText').style.backgroundColor = 'green'
+      myOutsideMultiplier =  myStoreVar1       
+    }   
+                                   
+                                   
+                                   
+                                   
+                                   
               
               
               
@@ -328,8 +339,18 @@ limitations under the License.
     }"><br>
     
 
-   <input type=button value="Delete myStoredText4" onclick="{
-      localStorage.removeItem('myStoredText4')                                           
+
+   Inside Multiplier = 1, Outside Multiplier: <input id="myOutsideText" type=text value = 0.2 size=5 onChange="{
+       myOutsideMultiplier = this.value
+       localStorage.setItem('myStoreOutside') 
+       this.style.backgroundcolor='green'
+   }"> 
+
+
+   <input type=button value="Reset Default" onclick="{
+      localStorage.removeItem('myStoreOutside')   
+       document.getElementById('myOutsideText').style.backgroundcolor='grey'
+       location.reload()
    }"><br>
    
 
@@ -413,7 +434,25 @@ let myFacingModeSetting = 'user'
 
 let myToRed = 80000   // loosely airborne RNA load for average person to get infected. Please help me science 
 let myToOrange = 40000 // Loosely airborne RNA to get concerned. Please help me science
-let myFontColor = 'green'    
+let myFontColor = 'green'  
+
+
+let myOutsideMultiplier = 0.20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      
 function myDitchVideo(){
 // not yet fully stopping webcam
