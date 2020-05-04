@@ -624,7 +624,8 @@ async function renderPrediction() {
        } else {      // outside or inside
            myBiomeMultiplier = myOutsideMultiplier   
        }    
-           
+        console.log('myBiomeMultiplier')   
+        console.log(myBiomeMultiplier)   
         // if (){}      // Breeze
            
         myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myBiomeMultiplier
