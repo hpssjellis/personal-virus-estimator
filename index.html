@@ -219,6 +219,8 @@ limitations under the License.
    if(myStoreMaskHere  != null){     
       document.getElementById('myMaskPercent').value = myStoreMaskHere                  
       document.getElementById('myMaskPercent').style.backgroundColor = 'green'
+      document.getElementById('myMaskType').value = ''  // selection box
+      document.getElementById('myMaskFit').value = ''   // selection box
     }             
               
               
@@ -497,7 +499,7 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
 
 <select id="myMaskFit" onChange="{
   document.getElementById('myMaskPercent').value =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
-}">
+ }">
     <option></option>
     <option value=1 selected>Sealed Well</option>
    <option value=0.75>Fogs Glasses</option>
