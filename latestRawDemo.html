@@ -1,5 +1,4 @@
 
-
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -121,21 +120,21 @@ limitations under the License.
     if(myStorage3  != null){
        document.getElementById('myLastReading').value = myStorage3  
         myLastAverage =  myStorage3 
-        console.log('myLastAverage')      
-        console.log(myLastAverage)      
-        console.log('myScoreTotal old')      
-        console.log(myScoreTotal)         
+       // console.log('myLastAverage')      
+      //  console.log(myLastAverage)      
+      //  console.log('myScoreTotal old')      
+      //  console.log(myScoreTotal)         
         const myNow =  new Date().getTime() 
         const myElapse =  ( myNow -  myTimeSinceRestart)/1000
-        console.log('myElapse')
-        console.log(myElapse)
+      //  console.log('myElapse')
+      //  console.log(myElapse)
         const myExtraScore =   myElapse * myLastAverage    
-        console.log('myExtraScore')  
-        console.log(myExtraScore)   // seconds since last app load
+      //  console.log('myExtraScore')  
+      //  console.log(myExtraScore)   // seconds since last app load
         myScoreTotal = parseFloat(myScoreTotal) + parseFloat(myExtraScore)                     // calculates if count same for duration of break          
-        console.log('myScoreTotal new')            
-        console.log(myScoreTotal)                
-        console.log()      
+      //  console.log('myScoreTotal new')            
+      //  console.log(myScoreTotal)                
+      //  console.log()      
         document.getElementById('myTotalCount').value = myScoreTotal
     } else { 
         myLastAverage = 0 
@@ -195,8 +194,48 @@ limitations under the License.
                                          
                                           
                                    
+   let myStoreOrangeHere = localStorage.getItem('myStoreOrange')
+   if(myStoreOrangeHere  != null){     
+      document.getElementById('myOrange').value = myStoreOrangeHere
+      myToOrange =   myStoreOrangeHere                           
+      document.getElementById('myOrange').style.backgroundColor = 'green'
+    }   else {
+       document.getElementById('myOrange').value = myToOrange       
+    }
+                                         
+                                    
+   let myStoreRedHere = localStorage.getItem('myStoreRed')
+   if(myStoreRedHere  != null){     
+      document.getElementById('myRed').value = myStoreRedHere
+      myToRed =   myStoreRedHere                           
+      document.getElementById('myRed').style.backgroundColor = 'green'
+    }    else {  
+      document.getElementById('myRed').value = myToRed        
+    }  
+                                                  
+                                       
+   let myStoreReduceHere = localStorage.getItem('myStoreReducer')
+   if(myStoreReduceHere  != null){     
+      document.getElementById('myReducer').value = myStoreReduceHere
+      myReductionPerInterval =   myStoreReduceHere                           
+      document.getElementById('myReducer').style.backgroundColor = 'green'
+    }    else {  
+      document.getElementById('myReducer').value = myReductionPerInterval       
+    }  
+          
+                                                  
+               
                                    
-              
+                                   
+                                   
+   let myStoreMaskHere = localStorage.getItem('myStoreMaskPercent')
+   if(myStoreMaskHere  != null){     
+      document.getElementById('myMaskPercent').value = myStoreMaskHere
+      myMaskPercentAmount = myStoreMaskHere
+      document.getElementById('myMaskPercent').style.backgroundColor = 'green'
+      document.getElementById('myMaskType').value = ''  // selection box
+      document.getElementById('myMaskFit').value = ''   // selection box
+    }             
               
               
               
@@ -230,20 +269,23 @@ limitations under the License.
       <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
            </div>
         </div> 
-    <div id="myInstructions" " onclick="document.getElementById('myInstructions').style.display='none';" style="display:inline; visibility:visible;">
-    <h4>Social Distance Game. Keep Your SDS (Social Distance Score) as low as possible, see if you can last the day before
-        getting in the red zone. Use the rear camera while you walk around. 
-        Stay in the green as long as possible, while walking through your daily life. Stay home if you are in the orange.
-        Click to remove this note</h4>
-    </div>
+ 
     
    
     <!--    --------------------------- Quick Choices ----------------------------------- --> 
     
     
+      
+    <input id="myMaskOffRadio" type=radio name="myMaskRadioName" Checked> <-- Mask Off, 
+    Mask On --> <input id="myMaskOnRadio" type=radio name="myMaskRadioName"><br> <br>  
+    
     
     <input id="myInsideRadio" type=radio name="myBiomeRadioName" Checked> <-- Inside, 
-    Outside --> <input id="myOutsideRadio" type=radio name="myBiomeRadioName"><br>
+    Outside --> <input id="myOutsideRadio" type=radio name="myBiomeRadioName"><br><br>
+    
+    
+    
+    
     
     Breeze: <select id="myBreezeSelect" onChange = "{
        if (this.value == '0'){
@@ -273,6 +315,17 @@ limitations under the License.
     }" 
     <br><br>
     
+      
+         <div id="myInstructions" " onclick="document.getElementById('myInstructions').style.display='none';" style="display:inline; visibility:visible;">
+    <h4>Social Distance Game. Keep Your SDS (Social Distance Score) as low as possible, see if you can last the day before
+        getting in the red zone. Use the rear camera while you walk around. 
+        Stay in the green as long as possible, while walking through your daily life. Stay home if you are in the orange.
+        Click to remove this note</h4>
+    </div>
+      
+      
+      
+      
     <!--    --------------------------- main Buttons ----------------------------------- -->
     
     <input id="myOffButton" type=button value="Pause Video" onclick="{
@@ -332,9 +385,9 @@ limitations under the License.
     <h4>Variables that must be saved and reloaded from local storage</h4>
     
     DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value" Title = "Milliseconds since January 1st of 1970 UTC"><br>
-    Total SDS: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"><br>
-    SDS Now: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"><br>
-    Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"><br>
+    Total SDS: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"  title="Combined Social Distance Score" ><br>
+    SDS Now: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"  title="Latest Social Distance Score"><br>
+    Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"   title="Front Camera = user,  Rear Camera = environment"><br>
     
     <input type="button" value="Store the above, might want to pause the app first" onClick="{
    localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
@@ -371,7 +424,7 @@ limitations under the License.
 
 
    Inside Multiplier = 1.00<br>
-   Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 onChange="{
+   Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 title="Less than 1 means less of an issue" onChange="{
        myOutsideMultiplier = this.value
        localStorage.setItem('myStoreOutside',  this.value) 
        location.reload()
@@ -383,8 +436,8 @@ limitations under the License.
 
 <!--  ------------------------------------------ breeze HTML ----------------------------------- -->
 
-   no Breeze Multiplier = 1.00<br>
-   Breeze Level 1: <input id="myBreezeLevel1" type=text value = 1.5 size=5 onChange="{
+   No Breeze Multiplier = 1.00<br>
+   Breeze Level 1: <input id="myBreezeLevel1" type=text value = 1.5 size=5 Title="A Thread shows breeze direction" onChange="{
        localStorage.setItem('myStoreBreezeLevel1',  this.value) 
        location.reload()
    }"> 
@@ -394,7 +447,7 @@ limitations under the License.
    }"><br>
 
 
-   Breeeze Level 2: <input id="myBreezeLevel2" type=text value = 2.5 size=5 onChange="{
+   Breeeze Level 2: <input id="myBreezeLevel2" type=text value = 2.5 size=5  Title="Breeze can be felt" onChange="{
        localStorage.setItem('myStoreBreezeLevel2',  this.value) 
        location.reload()
    }"> 
@@ -403,18 +456,98 @@ limitations under the License.
       location.reload()
    }"><br>
 
-   Breeze Level 3: <input id="myBreezeLevel3" type=text value = 5 size=5 onChange="{
+   Breeze Level 3: <input id="myBreezeLevel3" type=text value = 5 size=5 Title="Like in front of a fan" onChange="{
        localStorage.setItem('myStoreBreezeLevel3',  this.value) 
        location.reload()
    }"> 
    <input type=button value="Default" onclick="{
       localStorage.removeItem('myStoreBreezeLevel3')   
       location.reload()
+   }"><br><br>
+
+
+   Orange Setting: <input id="myOrange" type=text value = ""  title="Warning amount"  size=5 onChange="{
+       localStorage.setItem('myStoreOrange',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreOrange')   
+      location.reload()
    }"><br>
+
+   Red Setting: <input id="myRed" type=text value = ""  title="Danger amount" size=5 onChange="{
+       localStorage.setItem('myStoreRed',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreRed')   
+      location.reload()
+   }"><br>
+
+   Reducer per second: <input id="myReducer" type=text value = ""  title="Reduce every second" size=5 onChange="{
+       localStorage.setItem('myStoreReducer',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreReducer')   
+      location.reload()
+   }"><br><br>
+
 
 
    
 
+Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Title="(Science could help a bit here)"    onChange="{
+       localStorage.setItem('myStoreMaskPercent',  this.value) 
+       location.reload()
+   }" >%    
+   <input type=button value="Set" onclick="{
+     localStorage.setItem('myStoreMaskPercent',  myMaskPercentAmount) 
+     location.reload()
+   }">    
+    
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreMaskPercent')   
+      location.reload()
+   }"><br>
+
+<select id="myMaskType" onChange="{
+  myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
+  document.getElementById('myMaskPercent').value = myMaskPercentAmount
+  }">
+   <option ></option>
+   <option value=95>N95</option>
+   <option value=70>Surgical Mask</option>
+   <option value=70>4 Layer Mask Good Material(s)</option>
+   <option value=60>3 Layer Mask Good Material(s)</option>
+   <option value=50 selected>2 Layer Mask Good Material</option>
+   <option value=40>1 Layer Mask Good Material</option>
+   <option value=20>1 Layer Mask Visible Holes</option>
+</select>
+
+<select id="myMaskFit" onChange="{
+  myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
+ document.getElementById('myMaskPercent').value = myMaskPercentAmount
+}">
+    <option></option>
+    <option value=1 selected>Sealed Well</option>
+   <option value=0.75>Fogs Glasses</option>
+   <option value=0.50>Loose All Around</option>
+</select><br>
+
+<b>Note:Any mask helps others (Called Source Control).<br> 
+This Machine Learning Model's confidence is lowered by people wearing masks and that reduces the effect</b><br>
+This Machine Learning Model is not specifically trained to identify masks!<br>
+ 
+    
+    
+    
+
+
+
+
+   
+<!-- --------------------------------End local storage variables------------------------------------------------  -->
     <hr>
     
     <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>
@@ -502,6 +635,8 @@ let myOutsideMultiplier = 0.20
 let myBiomeMultiplier = 1
 
 
+let myMaskMultiplier = 1
+let myMaskPercentAmount = 50
 let myBreezeMultiplier = 1
 let myFacingBreeze = false
 
@@ -675,13 +810,29 @@ async function renderPrediction() {
         if (myMouthShut < 1 ){myMouthShut = 1}       
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
         
+       if (document.getElementById('myMaskOnRadio').checked){  // Is a mask on?
+          myMaskPercent = parseFloat(document.getElementById('myMaskPercent').value)
            
+           myMaskMultiplier = 1 -(myMaskPercent/100)  // Wearing mask, Change mass filtration percent to reduce the SDS  
+       } else {                                       
+           myMaskMultiplier = 1                       // Not Wearing Masks
+       }            
+         
+       console.log('myMaskPercentAmount')   
+       console.log(myMaskPercentAmount)   
+       console.log('myMaskMultiplier')   
+       console.log(myMaskMultiplier)    
            
        if (document.getElementById('myInsideRadio').checked){
-           myBiomeMultiplier = 1
-       } else {      // outside
+           myBiomeMultiplier = 1  // inside
+       } else {      // outside actually a reducer
            myBiomeMultiplier = myOutsideMultiplier   
        }    
+           
+             
+   
+           
+  
            
            
            
@@ -701,16 +852,16 @@ async function renderPrediction() {
       }  else {  myBreezeMultiplier   = 1}  
            
               
-        console.log('myFacingBreeze') 
-        console.log(myFacingBreeze) 
-        console.log('myBreezeMultiplier')   
-        console.log(myBreezeMultiplier)   
+       // console.log('myFacingBreeze') 
+       // console.log(myFacingBreeze) 
+       // console.log('myBreezeMultiplier')   
+       // console.log(myBreezeMultiplier)   
            
            
            
            
            
-        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myBiomeMultiplier * myBreezeMultiplier
+        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myMaskMultiplier * myBiomeMultiplier * myBreezeMultiplier
         myMax10Score += myScoreNow
        
         myScoreTotal += myScoreNow   
@@ -808,3 +959,11 @@ async function main() {
 main();
       
 </script>
+
+
+<h6>This is a game, use at your own risk<br>
+Made by Jeremy Ellis<br>
+Website:<a href="https://www.rocksetta.com">www.rocksetta.com</a><br>
+Twitter: <a href="https://twitter.com/rocksetta">@rocksetta</a> 
+
+</h6>
