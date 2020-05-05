@@ -217,7 +217,8 @@ limitations under the License.
                                      
    let myStoreMaskHere = localStorage.getItem('myStoreMaskPercent')
    if(myStoreMaskHere  != null){     
-      document.getElementById('myMaskPercent').value = myStoreMaskHere                  
+      document.getElementById('myMaskPercent').value = myStoreMaskHere
+      myMaskPercentAmount = myStoreMaskHere
       document.getElementById('myMaskPercent').style.backgroundColor = 'green'
       document.getElementById('myMaskType').value = ''  // selection box
       document.getElementById('myMaskFit').value = ''   // selection box
