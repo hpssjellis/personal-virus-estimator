@@ -733,10 +733,10 @@ async function renderPrediction() {
         if (myMouthShut < 1 ){myMouthShut = 1}       
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
         
-       if (document.getElementById('myMaskOnRadio').checked){
-           myMaskMultiplier = 1  // Not Wearing Masks
+       if (document.getElementById('myMaskOnRadio').checked){  // Is a mask on?
+           myMaskMultiplier = 1 -(myMaskPercent/100)  // Change mass filtration percent to reduce the SDS  
        } else {      // Wearing Mask
-           myMaskMultiplier = 1-(myMaskPercent/100)  // Change mass filtration percent to reduce the SDS 
+           myMaskMultiplier = 1// Not Wearing Masks
        }            
          
        console.log('myMaskPercent')   
