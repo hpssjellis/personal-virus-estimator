@@ -745,8 +745,8 @@ async function renderPrediction() {
        console.log(myMaskMultiplier)    
            
        if (document.getElementById('myInsideRadio').checked){
-           myBiomeMultiplier = 1
-       } else {      // outside
+           myBiomeMultiplier = 1  // inside
+       } else {      // outside actually a reducer
            myBiomeMultiplier = myOutsideMultiplier   
        }    
            
