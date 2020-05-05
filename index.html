@@ -513,6 +513,7 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
    }"><br>
 
 <select id="myMaskType" onChange="{
+  if (document.getElementById('myMaskFit').value == ''){document.getElementById('myMaskFit').value = 1}                                
   myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
   document.getElementById('myMaskPercent').value = myMaskPercentAmount
   }">
@@ -527,6 +528,7 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
 </select>
 
 <select id="myMaskFit" onChange="{
+ if (document.getElementById('myMaskType').value == ''){document.getElementById('myMaskType').value = 50}   
   myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
  document.getElementById('myMaskPercent').value = myMaskPercentAmount
 }">
@@ -534,7 +536,7 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
     <option value=1 selected>Sealed Well</option>
    <option value=0.75>Fogs Glasses</option>
    <option value=0.50>Loose All Around</option>
-</select><br>
+</select><br><br>
 
 <b>Note:Any mask helps others (Called Source Control).<br> 
 This Machine Learning Model's confidence is lowered by people wearing masks and that reduces the effect</b><br>
