@@ -605,7 +605,7 @@ let myBiomeMultiplier = 1
 
 
 let myMaskMultiplier = 1
-let myMaskPercent = 50
+let myMaskPercentAmount = 50
 let myBreezeMultiplier = 1
 let myFacingBreeze = false
 
@@ -780,13 +780,15 @@ async function renderPrediction() {
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
         
        if (document.getElementById('myMaskOnRadio').checked){  // Is a mask on?
-           myMaskMultiplier = 1 -(parseFloat(document.getElementById('myMaskPercent').value)/100)  // Wearing mask, Change mass filtration percent to reduce the SDS  
+          myMaskPercent = parseFloat(document.getElementById('myMaskPercent').value)
+           
+           myMaskMultiplier = 1 -(myMaskPercent/100)  // Wearing mask, Change mass filtration percent to reduce the SDS  
        } else {                                       
            myMaskMultiplier = 1                       // Not Wearing Masks
        }            
          
        console.log('myMaskPercent')   
-       console.log(myMaskPercent)   
+       console.log(myMaskPercentAmount)   
        console.log('myMaskMultiplier')   
        console.log(myMaskMultiplier)    
            
