@@ -214,7 +214,18 @@ limitations under the License.
       document.getElementById('myRed').value = myToRed        
     }  
                                                   
-                                     
+                                       
+   let myStoreReduceHere = localStorage.getItem('myStoreReducer')
+   if(myStoreReduceHere  != null){     
+      document.getElementById('myReducer').value = myStoreReduceHere
+      myReductionPerInterval =   myStoreReduceHere                           
+      document.getElementById('myReducer').style.backgroundColor = 'green'
+    }    
+                                                  
+               
+                                   
+                                   
+                                   
    let myStoreMaskHere = localStorage.getItem('myStoreMaskPercent')
    if(myStoreMaskHere  != null){     
       document.getElementById('myMaskPercent').value = myStoreMaskHere
@@ -468,6 +479,15 @@ limitations under the License.
    }"> 
    <input type=button value="Default" onclick="{
       localStorage.removeItem('myStoreRed')   
+      location.reload()
+   }"><br>
+
+   Reducer per second: <input id="myReducer" type=text value = ""  title="Reduce every second" size=5 onChange="{
+       localStorage.setItem('myStoreReducer',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreReducer')   
       location.reload()
    }"><br><br>
 
