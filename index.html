@@ -485,6 +485,7 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
 <select id="myMaskType" onChange="{
   document.getElementById('myMaskPercent').value =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
 }">
+   <option ></option>
    <option value=95>N95</option>
    <option value=70>Surgical Mask</option>
    <option value=70>4 Layer Mask Good Material(s)</option>
@@ -497,7 +498,8 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
 <select id="myMaskFit" onChange="{
   document.getElementById('myMaskPercent').value =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
 }">
-   <option value=1 selected>Sealed Well</option>
+    <option></option>
+    <option value=1 selected>Sealed Well</option>
    <option value=0.75>Fogs Glasses</option>
    <option value=0.50>Loose All Around</option>
 </select><br>
