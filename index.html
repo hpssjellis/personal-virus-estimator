@@ -465,12 +465,51 @@ limitations under the License.
 
 
 
+   
+
+Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Title="(Science could help a bit here)"    onChange="{
+       localStorage.setItem('myMaskPercent',  this.value) 
+       location.reload()
+   }" >%   
+        
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myMaskPercent')   
+      location.reload()
+   }"><br>
+
+<select id="myMaskType" onChange="{
+  document.getElementById('myMaskPercent').value =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
+}">
+   <option value=95>N95</option>
+   <option value=70>Surgical Mask</option>
+   <option value=70>4 Layer Mask Good Material(s)</option>
+   <option value=60>3 Layer Mask Good Material(s)</option>
+   <option value=50 selected>2 Layer Mask Good Material</option>
+   <option value=40>1 Layer Mask Good Material</option>
+   <option value=20>1 Layer Mask Visible Holes</option>
+</select>
+
+<select id="myMaskFit" onChange="{
+  document.getElementById('myMaskPercent').value =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
+}">
+   <option value=1 selected>Sealed Well</option>
+   <option value=0.75>Fogs Glasses</option>
+   <option value=0.50>Loose All Around</option>
+</select><br>
+
+<b>Note:Any mask helps others (Called Source Control).<br> 
+This Machine Learning Model's confidence is lowered by people wearing masks and that reduces the effect</b><br>
+This Machine Learning Model is not specifically trained to identify masks!<br>
+ 
+    
+    
+    
 
 
 
 
    
-
+<!-- --------------------------------End local storage variables------------------------------------------------  -->
     <hr>
     
     <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>
