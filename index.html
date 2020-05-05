@@ -552,6 +552,8 @@ let myOutsideMultiplier = 0.20
 let myBiomeMultiplier = 1
 
 
+let myMaskMultiplier = 1
+let myMaskPercent = 50
 let myBreezeMultiplier = 1
 let myFacingBreeze = false
 
@@ -725,13 +727,22 @@ async function renderPrediction() {
         if (myMouthShut < 1 ){myMouthShut = 1}       
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
         
-           
+       if (document.getElementById('myMaskOnRadio').checked){
+           myMaskMultiplier = 1
+       } else {      // outside
+           myMaskMultiplier = 1-(myMaskPercent/100)  // Change mass filtration percent to reduce the SDS 
+       }            
            
        if (document.getElementById('myInsideRadio').checked){
            myBiomeMultiplier = 1
        } else {      // outside
            myBiomeMultiplier = myOutsideMultiplier   
        }    
+           
+             
+   
+           
+       console.log()    
            
            
            
@@ -760,7 +771,7 @@ async function renderPrediction() {
            
            
            
-        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myBiomeMultiplier * myBreezeMultiplier
+        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myMaskMultiplier * myBiomeMultiplier * myBreezeMultiplier
         myMax10Score += myScoreNow
        
         myScoreTotal += myScoreNow   
