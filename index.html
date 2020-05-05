@@ -478,8 +478,12 @@ limitations under the License.
 Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Title="(Science could help a bit here)"    onChange="{
        localStorage.setItem('myStoreMaskPercent',  this.value) 
        location.reload()
-   }" >%   
-        
+   }" >%    
+   <input type=button value="Set" onclick="{
+     localStorage.setItem('myStoreMaskPercent',  myMaskPercentAmount) 
+     location.reload()
+   }">    
+    
    <input type=button value="Default" onclick="{
       localStorage.removeItem('myStoreMaskPercent')   
       location.reload()
@@ -488,8 +492,6 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
 <select id="myMaskType" onChange="{
   myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
   document.getElementById('myMaskPercent').value = myMaskPercentAmount
-  localStorage.setItem('myStoreMaskPercent',  myMaskPercentAmount) 
-  location.reload()
   }">
    <option ></option>
    <option value=95>N95</option>
@@ -504,8 +506,6 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
 <select id="myMaskFit" onChange="{
   myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
  document.getElementById('myMaskPercent').value = myMaskPercentAmount
- localStorage.setItem('myStoreMaskPercent',  myMaskPercentAmount) 
- location.reload()
 }">
     <option></option>
     <option value=1 selected>Sealed Well</option>
