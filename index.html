@@ -727,7 +727,7 @@ async function renderPrediction() {
         if (myMouthShut < 1 ){myMouthShut = 1}       
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
         
-       if (document.getElementById('myMaskOnRadio').checked){
+       if (document.getElementById('myMaskRadioName').checked){
            myMaskMultiplier = 1
        } else {      // outside
            myMaskMultiplier = 1-(myMaskPercent/100)  // Change mass filtration percent to reduce the SDS 
