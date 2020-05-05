@@ -214,7 +214,12 @@ limitations under the License.
       document.getElementById('myRed').value = myToRed        
     }  
                                                   
-              
+                                     
+   let myStoreMaskHere = localStorage.getItem('myStoreMaskPercent')
+   if(myStoreMaskHere  != null){     
+      document.getElementById('myMaskPercent').value = myStoreMaskHere                  
+      document.getElementById('myMaskPercent').style.backgroundColor = 'green'
+    }             
               
               
               
@@ -468,12 +473,12 @@ limitations under the License.
    
 
 Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Title="(Science could help a bit here)"    onChange="{
-       localStorage.setItem('myMaskPercent',  this.value) 
+       localStorage.setItem('myStoreMaskPercent',  this.value) 
        location.reload()
    }" >%   
         
    <input type=button value="Default" onclick="{
-      localStorage.removeItem('myMaskPercent')   
+      localStorage.removeItem('myStoreMaskPercent')   
       location.reload()
    }"><br>
 
@@ -773,9 +778,9 @@ async function renderPrediction() {
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
         
        if (document.getElementById('myMaskOnRadio').checked){  // Is a mask on?
-           myMaskMultiplier = 1 -(myMaskPercent/100)  // Change mass filtration percent to reduce the SDS  
-       } else {      // Wearing Mask
-           myMaskMultiplier = 1// Not Wearing Masks
+           myMaskMultiplier = 1 -(parseFloat(document.getElementById('myMaskPercent').value)/100)  // Wearing mask, Change mass filtration percent to reduce the SDS  
+       } else {                                       
+           myMaskMultiplier = 1                       // Not Wearing Masks
        }            
          
        console.log('myMaskPercent')   
