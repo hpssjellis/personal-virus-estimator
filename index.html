@@ -94,7 +94,7 @@ limitations under the License.
 <body style="width:400px;" onload="{
 
 
-////////////////////////////// local Stroage that must be reset if not found ///////////////////////////////////////
+////////////////////////////// local Storage that must be reset if not found ///////////////////////////////////////
 
    myStorage1 = localStorage.getItem('myStoredText1')
    if(myStorage1  != null){     
@@ -244,7 +244,7 @@ limitations under the License.
 
           
 }">   
-    <h4 align=center " >Social Distancing Artificial Intelligence Web App</h4>  
+    <h4 align=center " >Social Distancing Game</h4>  
     
   <div id="main">	
     <div class="container">        	
@@ -317,13 +317,7 @@ limitations under the License.
     <br><br>
     
       
-         <div id="myInstructions" " onclick="document.getElementById('myInstructions').style.display='none';" style="display:inline; visibility:visible;">
-    <h4>Social Distance Game. Keep Your SDS (Social Distance Score) as low as possible, see if you can last the day before
-        getting in the red zone. Use the rear camera while you walk around. 
-        Stay in the green as long as possible, while walking through your daily life. Stay home if you are in the orange.
-        Click to remove this note</h4>
-    </div>
-      
+
       
       
       
@@ -376,8 +370,17 @@ limitations under the License.
     
      
 
-  <div id="myDiv01">...</div> 
+  <div id="myDiv01">...</div> <br>
 
+          <div id="myInstructions" " onclick="document.getElementById('myInstructions').style.display='none';" style="display:inline; visibility:visible;">
+    <h4>Social Distance Game. Keep Your SDS (Social Distance Score) as low as possible, see if you can last the day before
+        getting in the red zone. Use your cell phones rear camera while you walk around. 
+        Stay in the green as long as possible. The orange is a warning. Red means you have lost this round of the game.
+        Click to remove this note</h4>
+    </div>
+                        
+                   
+                   
      <hr> <br><br>  <br><br>  <br><br>  <br><br> 
     <h4>Below here are more advanced setting, most users can ignore.</h4>
 
@@ -563,10 +566,14 @@ This Machine Learning Model is not specifically trained to identify masks!<br>
             Kids are detected as slightly farther away than adults. <br>
         <li> Infection Viral load and Viral Reduction per second are just a guess at the moment.<br>
         <li> Effectiveness of homemade multilayer cloth masks for personal protection has very little scientific support at the moment 
-            (Effectiveness for source control of even single layer homemade mask is presently highly supported as of April 2020)<br>  
-            Source control for N95 masks with valves is a hot topic at the moment (May 2020).<br> N95 masks with unfiltered exhale valves 
-            give personal protection at 95% but no source control protection. Not all N95 respirators have unfiltered exhaust valves.<br>
-    </ul>
+            (Effectiveness for source control of even single layer homemade mask is presently highly supported as of April 2020)<br> 
+    </ul><br><br>
+    
+  <h5> This Social Distancing Game can educate people about using physical distancing to reduce the number of respiratory droplets 
+      a person might be subjected to. This Machine Learning Web App has minimal scientific backing to be more than anything
+      except a game, but it does point the way for Science and Machine Learning to work together to make Apps which can handle 
+      complex physical situations to assist people in learning a new task or a new topic. </h5>
+    
     
 </body>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script> -->
@@ -964,7 +971,7 @@ main();
 </script>
 
 
-<h6>This is a game, use at your own risk<br>
+<h6>This is a game, use at your own risk!<br>
 Made by Jeremy Ellis<br>
 Website:<a href="https://www.rocksetta.com">www.rocksetta.com</a><br>
 Twitter: <a href="https://twitter.com/rocksetta">@rocksetta</a> 
