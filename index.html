@@ -168,7 +168,7 @@ limitations under the License.
    let myStoreBiome1 = localStorage.getItem('myStoreOutside')
    if(myStoreBiome1  != null){     
       document.getElementById('myOutsideText').value = myStoreBiome1
-      document.getElementById('myOutsideText').style.backgroundColor = 'green'
+      document.getElementById('myOutsideText').style.backgroundColor = 'lime'
       myOutsideMultiplier =  myStoreBiome1       
     }   
                                    
@@ -177,20 +177,20 @@ limitations under the License.
    let myStoreBreeze1 = localStorage.getItem('myStoreBreezeLevel1')
    if(myStoreBreeze1  != null){     
       document.getElementById('myBreezeLevel1').value = myStoreBreeze1
-      document.getElementById('myBreezeLevel1').style.backgroundColor = 'green'
+      document.getElementById('myBreezeLevel1').style.backgroundColor = 'lime'
     }   
                                    
     
    let myStoreBreeze2 = localStorage.getItem('myStoreBreezeLevel2')
    if(myStoreBreeze2  != null){     
       document.getElementById('myBreezeLevel2').value = myStoreBreeze2
-      document.getElementById('myBreezeLevel2').style.backgroundColor = 'green'
+      document.getElementById('myBreezeLevel2').style.backgroundColor = 'lime'
     }   
           
    let myStoreBreeze3 = localStorage.getItem('myStoreBreezeLevel3')
    if(myStoreBreeze3  != null){     
       document.getElementById('myBreezeLevel3').value = myStoreBreeze3
-      document.getElementById('myBreezeLevel3').style.backgroundColor = 'green'
+      document.getElementById('myBreezeLevel3').style.backgroundColor = 'lime'
     }   
                                          
                                           
@@ -199,7 +199,7 @@ limitations under the License.
    if(myStoreOrangeHere  != null){     
       document.getElementById('myOrange').value = myStoreOrangeHere
       myToOrange =   myStoreOrangeHere                           
-      document.getElementById('myOrange').style.backgroundColor = 'green'
+      document.getElementById('myOrange').style.backgroundColor = 'lime'
     }   else {
        document.getElementById('myOrange').value = myToOrange       
     }
@@ -209,7 +209,7 @@ limitations under the License.
    if(myStoreRedHere  != null){     
       document.getElementById('myRed').value = myStoreRedHere
       myToRed =   myStoreRedHere                           
-      document.getElementById('myRed').style.backgroundColor = 'green'
+      document.getElementById('myRed').style.backgroundColor = 'lime'
     }    else {  
       document.getElementById('myRed').value = myToRed        
     }  
@@ -219,7 +219,7 @@ limitations under the License.
    if(myStoreReduceHere  != null){     
       document.getElementById('myReducer').value = myStoreReduceHere
       myReductionPerInterval =   myStoreReduceHere                           
-      document.getElementById('myReducer').style.backgroundColor = 'green'
+      document.getElementById('myReducer').style.backgroundColor = 'lime'
     }    else {  
       document.getElementById('myReducer').value = myReductionPerInterval       
     }  
@@ -233,7 +233,7 @@ limitations under the License.
    if(myStoreMaskHere  != null){     
       document.getElementById('myMaskPercent').value = myStoreMaskHere
       myMaskPercentAmount = myStoreMaskHere
-      document.getElementById('myMaskPercent').style.backgroundColor = 'green'
+      document.getElementById('myMaskPercent').style.backgroundColor = 'lime'
       document.getElementById('myMaskType').value = ''  // selection box
       document.getElementById('myMaskFit').value = ''   // selection box
     }             
@@ -306,7 +306,7 @@ limitations under the License.
     <input id="myBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:visible; width:100px; height:30px; left:30px; top:250px"  onTouchStart="{
        this.onMouseOver(); event.preventDefault();
     }"  onMouseOver="{
-        document.getElementById('myBreezeButton').style.backgroundColor = 'green'
+        document.getElementById('myBreezeButton').style.backgroundColor = 'lime'
         myFacingBreeze = true             
     }"  onTouchEnd="{
         this.onMouseOut(); event.preventDefault();
@@ -516,6 +516,7 @@ Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Tit
    }"><br>
 
 <select id="myMaskType" onChange="{
+  if (document.getElementById('myMaskPercent').style.backgroundcolor == 'lime'){document.getElementById('myMaskPercent').style.backgroundcolor = 'yellow'}                                
   if (document.getElementById('myMaskFit').value == ''){document.getElementById('myMaskFit').value = 1}                                
   myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
   document.getElementById('myMaskPercent').value = myMaskPercentAmount
