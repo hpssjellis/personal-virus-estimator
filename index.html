@@ -248,12 +248,7 @@ limitations under the License.
       <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
            </div>
         </div> 
-    <div id="myInstructions" " onclick="document.getElementById('myInstructions').style.display='none';" style="display:inline; visibility:visible;">
-    <h4>Social Distance Game. Keep Your SDS (Social Distance Score) as low as possible, see if you can last the day before
-        getting in the red zone. Use the rear camera while you walk around. 
-        Stay in the green as long as possible, while walking through your daily life. Stay home if you are in the orange.
-        Click to remove this note</h4>
-    </div>
+ 
     
    
     <!--    --------------------------- Quick Choices ----------------------------------- --> 
@@ -299,6 +294,17 @@ limitations under the License.
     }" 
     <br><br>
     
+      
+         <div id="myInstructions" " onclick="document.getElementById('myInstructions').style.display='none';" style="display:inline; visibility:visible;">
+    <h4>Social Distance Game. Keep Your SDS (Social Distance Score) as low as possible, see if you can last the day before
+        getting in the red zone. Use the rear camera while you walk around. 
+        Stay in the green as long as possible, while walking through your daily life. Stay home if you are in the orange.
+        Click to remove this note</h4>
+    </div>
+      
+      
+      
+      
     <!--    --------------------------- main Buttons ----------------------------------- -->
     
     <input id="myOffButton" type=button value="Pause Video" onclick="{
@@ -728,8 +734,8 @@ async function renderPrediction() {
         myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
         
        if (document.getElementById('myMaskOnRadio').checked){
-           myMaskMultiplier = 1
-       } else {      // outside
+           myMaskMultiplier = 1  // Not Wearing Masks
+       } else {      // Wearing Mask
            myMaskMultiplier = 1-(myMaskPercent/100)  // Change mass filtration percent to reduce the SDS 
        }            
          
