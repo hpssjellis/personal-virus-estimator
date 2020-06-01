@@ -763,10 +763,10 @@ async function renderPrediction() {
         if (myScoreTotal > myToRed) {myFontColor = 'red'}
       
         document.getElementById('myDivNow').innerHTML = '0'
-        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>' 
+        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
-        document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
+        document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)
         localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
         localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
       
@@ -881,16 +881,16 @@ async function renderPrediction() {
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
         if (myScoreTotal > myToRed) {myFontColor = 'red'}
          
-        document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(0) 
-        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(0) + '</font><br>'
+        document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
+        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
         document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
 
         // need to save this new total score
-        document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)  
+        document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)  
         localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
-        document.getElementById('myLastReading').value =   myMax10Score.toFixed(0) 
-        localStorage.setItem('myStoredText3', myMax10Score.toFixed(0))  
+        document.getElementById('myLastReading').value =   myMax10Score.toFixed(2) 
+        localStorage.setItem('myStoredText3', myMax10Score.toFixed(2))  
 
 
 
