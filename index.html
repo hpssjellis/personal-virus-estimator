@@ -654,7 +654,7 @@ However, this Machine Learning Model is not specifically trained to identify mas
 //Global Variables
 let myScoreNow = 0
 let myScoreTotal 
-let myPersonMultiplier = 1   // theoretically different for each person default set at 50. Lower means better defending virus
+let myPersonMultiplier = 1   // Set for 50% of people. Higher number for people who it is easier to get an infection
 
 let myStopApp = false
 let myDistanceCutoff = 2 // 50  // Distance in pixels that a facewidth is not relevant  close = 600-200  
@@ -667,7 +667,7 @@ let myDoSet = true                // for calculating all people not just the fir
 
 
 let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on 1 second intervals
-let myReductionPerInterval = 1  // number of virus you can expell per second. This is important, probably fairly low around 50
+let myReductionPerInterval = 0.75  // number of virus you can expelled per second. This is important, probably fairly low around 50
 
 
 let myMax10Score = 0
@@ -801,7 +801,7 @@ async function renderPrediction() {
         if (myScoreTotal > myToRed) {myFontColor = 'red'}
       
         document.getElementById('myDivNow').innerHTML = '0'
-        document.getElementById('myDivTotal').innerHTML = '<font style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
+        document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)
@@ -920,7 +920,7 @@ async function renderPrediction() {
         if (myScoreTotal > myToRed) {myFontColor = 'red'}
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
-        document.getElementById('myDivTotal').innerHTML = '<font style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
+        document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
         document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
 
