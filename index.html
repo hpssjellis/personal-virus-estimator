@@ -309,8 +309,8 @@ limitations under the License.
     
     
       
-    <input id="myMaskOffRadio" type=radio name="myMaskRadioName" Checked> <-- Mask Off, 
-    Mask On --> <input id="myMaskOnRadio" type=radio name="myMaskRadioName"><br> <br>  
+    <input id="myMaskOffRadio" type=radio name="myMaskRadioName" Checked> <-- My Mask Off, 
+    My Mask On --> <input id="myMaskOnRadio" type=radio name="myMaskRadioName"><br> <br>  
     
     
     <input id="myInsideRadio" type=radio name="myBiomeRadioName" Checked> <-- Inside, 
@@ -676,8 +676,8 @@ let myFontColor = 'green'
 
 
 let myOutsideMultiplier = 0.0526   // orignal 0.20    how much outside is better than inside 19* 1/19 = 0.0526 is latest research
-let myBiomeMultiplier =  0.01  //Originally I set at 1, but to reduce numbers I am reducing this a lot
-
+let myBiomeMultiplier      // need to test if outside or inside
+let myBiomeMultiplierOriginal = 0.01   //Originally I set at 1, but to reduce numbers I am reducing this a lot
 
 let myMaskMultiplier = 1
 let myMaskPercentAmount = 50
@@ -868,7 +868,7 @@ async function renderPrediction() {
        console.log(myMaskMultiplier)    
            
        if (document.getElementById('myInsideRadio').checked){
-           myBiomeMultiplier = 1  // inside
+           myBiomeMultiplier = myBiomeMultiplierOriginal  // inside value
        } else {      // outside actually a reducer
            myBiomeMultiplier = myOutsideMultiplier   
        }    
