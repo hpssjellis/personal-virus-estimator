@@ -157,7 +157,7 @@ limitations under the License.
         const myExtraScore =   myElapse * myLastAverage    
       //  console.log('myExtraScore')  
       //  console.log(myExtraScore)   // seconds since last app load
-        myScoreTotal = parseFloat(myScoreTotal) + parseFloat(myExtraScore)                     // calculates if count same for duration of break          
+        myScoreTotal = parseFloat(myScoreTotal) + parseFloat(myExtraScore) // calculates if count same for duration of break          
       //  console.log('myScoreTotal new')            
       //  console.log(myScoreTotal)                
       //  console.log()      
@@ -652,6 +652,9 @@ However, this Machine Learning Model is not specifically trained to identify mas
  */
 
 //Global Variables
+    
+let myAlwaysRed = false;    // once infected can not be un-infected    
+    
 let myScoreNow = 0
 let myScoreTotal 
 let myPersonMultiplier = 1   // Set for 50% of people. Higher number for people who it is easier to get an infection
@@ -797,12 +800,18 @@ async function renderPrediction() {
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
         myFontColor = 'green'
+        if (myAlwaysRed){ myFontColor = 'red'}  // once infected you can't go back
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
-        if (myScoreTotal > myToRed) {myFontColor = 'red'}
+        if (myScoreTotal > myToRed) {
+            myFontColor = 'red'
+            myAlwaysRed = true
+        }
       
         document.getElementById('myDivNow').innerHTML = '0'
         document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
-      
+        if (myAlwaysRed){     
+            document.getElementById('myDivTotal').innerHTML += 'You have been infected. You can not be un-infected'
+        } 
         document.getElementById('myDateTime').value =  myTimeSinceRestart
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)
         localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
@@ -921,6 +930,10 @@ async function renderPrediction() {
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
         document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
+        if (myAlwaysRed){     
+            document.getElementById('myDivTotal').innerHTML += 'You have been infected. You can not be un-infected'
+        }
+           
         document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
 
