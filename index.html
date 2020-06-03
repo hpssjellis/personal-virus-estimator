@@ -469,9 +469,10 @@ limitations under the License.
     
     
     <input type=button value="Clear ALL Local Stored variables" onClick="{
-      if (confirm('Clear all the variables you have stored, resetting App to defualts?')) {
+      if (confirm('Clear all the local variables you have stored, resetting all defaults?')) {
           window.localStorage.clear(); 
           myScoreTotal = 0   // since retained by the app
+          myAlwaysRed = false   // since retained by the app
           location.reload()
       }                                                                                                                                                                                                    
     }"><br><br>
