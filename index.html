@@ -59,11 +59,9 @@ limitations under the License.
     
     <!--
 
-<script src="https://unpkg.com/@tensorflow/tfjs"></script>    
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@1.7.2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@1.7.2"></script> 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@1.7.2/dist/tf-backend-wasm.js"></script>
+<script src="https://unpkg.com/@tensorflow/tfjs@2.0.0"></script>    
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh@0.0.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.0.0/dist/tf-backend-wasm.js"></script>
 
 
 
@@ -795,7 +793,7 @@ async function renderPrediction() {
         if (myScoreTotal > myToRed) {myFontColor = 'red'}
       
         document.getElementById('myDivNow').innerHTML = '0'
-        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
+        document.getElementById('myDivTotal').innerHTML = '<font style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
       
         document.getElementById('myDateTime').value =  myTimeSinceRestart
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)
