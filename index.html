@@ -810,7 +810,7 @@ async function renderPrediction() {
         console.log(myFontColor) 
       
         document.getElementById('myDivNow').innerHTML = '0'
-        document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
+        document.getElementById('myDivTotal').innerHTML = '<font style="font-size:30px; color:' + myFontColor + ';"> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
         if (myAlwaysRed){     
             document.getElementById('myDivTotal').innerHTML += '<font style=color:red;>You have been infected.<br> You can not be un-infected</font>'
         } 
@@ -934,7 +934,7 @@ async function renderPrediction() {
         console.log(myFontColor)   
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
-        document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
+        document.getElementById('myDivTotal').innerHTML = '<font style="font-size:30px; color:' + myFontColor + ';"> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
         if (myAlwaysRed){     
           document.getElementById('myDivTotal').innerHTML += '<font style=color:red;>You have been infected.<br> You can not be un-infected</font>'
        }
