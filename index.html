@@ -926,7 +926,7 @@ async function renderPrediction() {
         myScoreTotal += myScoreNow   
         myFontColor = 'green'
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
-        if (myScoreTotal > myToRed) {myFontColor = 'red'}
+        if (myScoreTotal > myToRed) {myFontColor = 'red'; myAlwaysRed = true}
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
         document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
