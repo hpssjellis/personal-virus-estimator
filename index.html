@@ -800,8 +800,8 @@ async function renderPrediction() {
        }   
        if (myScoreTotal < 0){myScoreTotal = 0} 
         myFontColor = 'green'
-        if (myAlwaysRed){ myFontColor = 'red'}  // once infected you can't go back
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
+        if (myAlwaysRed){ myFontColor = 'red'}  // once infected you can't go back
         if (myScoreTotal > myToRed) {
             myFontColor = 'red'
             myAlwaysRed = true
@@ -810,7 +810,7 @@ async function renderPrediction() {
         document.getElementById('myDivNow').innerHTML = '0'
         document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
         if (myAlwaysRed){     
-            document.getElementById('myDivTotal').innerHTML += 'You have been infected. You can not be un-infected'
+            document.getElementById('myDivTotal').innerHTML += '<font style=color:red;>You have been infected.<br> You can not be un-infected</font>'
         } 
         document.getElementById('myDateTime').value =  myTimeSinceRestart
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)
@@ -924,15 +924,16 @@ async function renderPrediction() {
         myMax10Score += myScoreNow
        
         myScoreTotal += myScoreNow   
-        myFontColor = 'green'
+        myFontColor = 'green'      
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
+        if (myAlwaysRed){ myFontColor = 'red'}  // once infected you can't go back
         if (myScoreTotal > myToRed) {myFontColor = 'red'; myAlwaysRed = true}
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
         document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
         if (myAlwaysRed){     
-            document.getElementById('myDivTotal').innerHTML += 'You have been infected. You can not be un-infected'
-        }
+          document.getElementById('myDivTotal').innerHTML += '<font style=color:red;>You have been infected.<br> You can not be un-infected</font>'
+       }
            
         document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
