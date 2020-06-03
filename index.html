@@ -806,6 +806,8 @@ async function renderPrediction() {
             myFontColor = 'red'
             myAlwaysRed = true
         }
+         console.log('myFontColor early')   
+        console.log(myFontColor) 
       
         document.getElementById('myDivNow').innerHTML = '0'
         document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
@@ -928,6 +930,8 @@ async function renderPrediction() {
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
         if (myAlwaysRed){ myFontColor = 'red'}  // once infected you can't go back
         if (myScoreTotal > myToRed) {myFontColor = 'red'; myAlwaysRed = true}
+        console.log('myFontColor ')   
+        console.log(myFontColor)   
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
         document.getElementById('myDivTotal').innerHTML = '<font style=font-size:30px; color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
