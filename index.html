@@ -194,7 +194,9 @@ limitations under the License.
       document.getElementById('myOutsideText').value = myStoreBiome1
       document.getElementById('myOutsideText').style.backgroundColor = 'lime'
       myOutsideMultiplier =  myStoreBiome1       
-    }   
+    } else {     
+      document.getElementById('myOutsideText').value = myOutsideMultiplier
+    }  
                                    
                                    
    
@@ -458,6 +460,11 @@ limitations under the License.
 
 
    Inside Multiplier = 1.00<br>
+    
+    
+    
+    
+    
    Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 title="Less than 1 means less of an issue" onChange="{
        myOutsideMultiplier = this.value
        localStorage.setItem('myStoreOutside',  this.value) 
@@ -659,7 +666,7 @@ let myDoSet = true                // for calculating all people not just the fir
 
 
 let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on 1 second intervals
-let myReductionPerInterval = 500  // number of virus you can expell per second. This is important, probably fairly low around 50
+let myReductionPerInterval = 1  // number of virus you can expell per second. This is important, probably fairly low around 50
 
 
 let myMax10Score = 0
