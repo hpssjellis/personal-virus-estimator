@@ -43,12 +43,13 @@ limitations under the License.
 
     
     
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@1.7.4"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@1.7.4"></script> 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh@0.0.3"></script>
-
-<!-- Adds the WASM backend to the global backend registry -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@1.7.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.0.0/dist/tf-backend-wasm.js"></script> 
+    
+    
+    
+    
     
     
 
@@ -59,11 +60,9 @@ limitations under the License.
     
     <!--
 
-<script src="https://unpkg.com/@tensorflow/tfjs"></script>    
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@1.7.2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@1.7.2"></script> 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@1.7.2/dist/tf-backend-wasm.js"></script>
+<script src="https://unpkg.com/@tensorflow/tfjs@2.0.0"></script>    
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh@0.0.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.0.0/dist/tf-backend-wasm.js"></script>
 
 
 
@@ -158,7 +157,7 @@ limitations under the License.
         const myExtraScore =   myElapse * myLastAverage    
       //  console.log('myExtraScore')  
       //  console.log(myExtraScore)   // seconds since last app load
-        myScoreTotal = parseFloat(myScoreTotal) + parseFloat(myExtraScore)                     // calculates if count same for duration of break          
+        myScoreTotal = parseFloat(myScoreTotal) + parseFloat(myExtraScore) // calculates if count same for duration of break          
       //  console.log('myScoreTotal new')            
       //  console.log(myScoreTotal)                
       //  console.log()      
@@ -187,8 +186,14 @@ limitations under the License.
         document.getElementById('myCameraMode').value = myFacingModeSetting
    }
 
- ///////////////////////////////// local storage that unless saved is updated by newer versions of the app.//////////////////////              
- 
+ ///////////////////////////////// local storage that unless saved is updated by newer versions of the app.//////////////////////  
+                                   
+                                   
+   let myAlways = localStorage.getItem('myAlwaysColor')
+   if(myAlways  != null){     
+      myAlwaysRed =  myAlways    // in this case probably true     
+    } // defined on startup as false
+         
               
   
    let myStoreBiome1 = localStorage.getItem('myStoreOutside')
@@ -196,7 +201,9 @@ limitations under the License.
       document.getElementById('myOutsideText').value = myStoreBiome1
       document.getElementById('myOutsideText').style.backgroundColor = 'lime'
       myOutsideMultiplier =  myStoreBiome1       
-    }   
+    } else {     
+      document.getElementById('myOutsideText').value = myOutsideMultiplier
+    }  
                                    
                                    
    
@@ -225,9 +232,11 @@ limitations under the License.
    if(myStoreOrangeHere  != null){     
       document.getElementById('myOrange').value = myStoreOrangeHere
       myToOrange =   myStoreOrangeHere                           
-      document.getElementById('myOrange').style.backgroundColor = 'lime'
+      document.getElementById('myOrange').style.backgroundColor = 'lime'                                   
+       document.getElementById('myOrangeDiv').innerHTML = '<font style=color:orange;>Warning at: '+myToOrange  + '</font>, '   
     }   else {
-       document.getElementById('myOrange').value = myToOrange       
+       document.getElementById('myOrange').value = myToOrange                         
+       document.getElementById('myOrangeDiv').innerHTML = '<font style=color:orange;>Warning at: '+myToOrange  + '</font>, '           
     }
                                          
                                     
@@ -235,9 +244,11 @@ limitations under the License.
    if(myStoreRedHere  != null){     
       document.getElementById('myRed').value = myStoreRedHere
       myToRed =   myStoreRedHere                           
-      document.getElementById('myRed').style.backgroundColor = 'lime'
+      document.getElementById('myRed').style.backgroundColor = 'lime'                        
+      document.getElementById('myRedDiv').innerHTML  = ' <font style=color:red;>Infected at: '+myToRed  + '</font>'    
     }    else {  
-      document.getElementById('myRed').value = myToRed        
+      document.getElementById('myRed').value = myToRed               
+      document.getElementById('myRedDiv').innerHTML = ' <font style=color:red;>Infected at: '+myToRed  + '</font>'          
     }  
                                                   
                                        
@@ -293,7 +304,9 @@ limitations under the License.
         </div>
 
     
-      <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
+      <div id="myDivNow"></div>   <div id="myDivTotal">...</div> 
+      <span id="myOrangeDiv">orange</span>   <span id="myRedDiv">red</span>  <br><br>
+                                                      
            </div>
         </div> 
  
@@ -303,8 +316,8 @@ limitations under the License.
     
     
       
-    <input id="myMaskOffRadio" type=radio name="myMaskRadioName" Checked> <-- Mask Off, 
-    Mask On --> <input id="myMaskOnRadio" type=radio name="myMaskRadioName"><br> <br>  
+    <input id="myMaskOffRadio" type=radio name="myMaskRadioName" Checked> <-- My Mask Off, 
+    My Mask On --> <input id="myMaskOnRadio" type=radio name="myMaskRadioName"><br> <br>  
     
     
     <input id="myInsideRadio" type=radio name="myBiomeRadioName" Checked> <-- Inside, 
@@ -365,7 +378,8 @@ limitations under the License.
    }">
     
     <input type=button value="Reset Total Score to Zero" onclick="{
-          myScoreTotal = 0      
+          myScoreTotal = 0 
+          myAlwaysRed = false
           myTimeSinceRestart = new Date().getTime()
           document.getElementById('myDateTime').value =  myTimeSinceRestart
           document.getElementById('myTotalCount').value = myScoreTotal
@@ -454,6 +468,11 @@ limitations under the License.
 
 
    Inside Multiplier = 1.00<br>
+    
+    
+    
+    
+    
    Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 title="Less than 1 means less of an issue" onChange="{
        myOutsideMultiplier = this.value
        localStorage.setItem('myStoreOutside',  this.value) 
@@ -640,13 +659,16 @@ However, this Machine Learning Model is not specifically trained to identify mas
  */
 
 //Global Variables
+    
+let myAlwaysRed = false;    // once infected can not be un-infected    
+    
 let myScoreNow = 0
 let myScoreTotal 
-let myPersonMultiplier = 50   // theoretically different for each person default set at 50. Lower means better defending virus
+let myPersonMultiplier = 1   // Set for 50% of people. Higher number for people who it is easier to get an infection
 
 let myStopApp = false
 let myDistanceCutoff = 10 // 50  // Distance in pixels that a facewidth is not relevant  close = 600-200  
-let myMouthOpenCutoff = 0.03
+let myMouthOpenCutoff = 0.03      
 
 let myTimeSinceRestart 
 let myTimeSinceAwake = 0
@@ -655,7 +677,7 @@ let myDoSet = true                // for calculating all people not just the fir
 
 
 let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on 1 second intervals
-let myReductionPerInterval = 500  // number of virus you can expell per second. This is important, probably fairly low around 50
+let myReductionPerInterval = 0.75  // number of virus you can expelled per second. This is important, probably fairly low around 50
 
 
 let myMax10Score = 0
@@ -664,14 +686,14 @@ let myLastAverage
 let myFacingModeSetting = 'user'
 
 
-let myToRed = 80000   // loosely airborne RNA load for average person to get infected. Please help me science 
-let myToOrange = 40000 // Loosely airborne RNA to get concerned. Please help me science
+let myToRed = 4000   // loosely airborne RNA load for average person to get infected. Please help me science 
+let myToOrange = 3000 // Loosely airborne RNA to get concerned. Please help me science
 let myFontColor = 'green'  
 
 
-let myOutsideMultiplier = 0.20
-let myBiomeMultiplier = 1
-
+let myOutsideMultiplier = 0.0526   // orignal 0.20    how much outside is better than inside 19* 1/19 = 0.0526 is latest research
+let myBiomeMultiplier      // need to test if outside or inside
+let myBiomeMultiplierOriginal = 1 // 0.01  //Originally I set at 1, but to reduce numbers I am reducing this a lot
 
 let myMaskMultiplier = 1
 let myMaskPercentAmount = 50
@@ -786,11 +808,20 @@ async function renderPrediction() {
        if (myScoreTotal < 0){myScoreTotal = 0} 
         myFontColor = 'green'
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
-        if (myScoreTotal > myToRed) {myFontColor = 'red'}
+        if (myAlwaysRed){ myFontColor = 'red'}  // once infected you can't go back
+        if (myScoreTotal > myToRed) {
+            myFontColor = 'red'
+            myAlwaysRed = true
+            localStorage.setItem('myAlwaysColor', myAlwaysRed)  
+        }
+       //  console.log('myFontColor early')   
+       // console.log(myFontColor) 
       
         document.getElementById('myDivNow').innerHTML = '0'
-        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
-      
+        document.getElementById('myDivTotal').innerHTML = '<font style="font-size:30px; color:' + myFontColor + ';"> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
+        if (myAlwaysRed){     
+            document.getElementById('myDivTotal').innerHTML += '<font style=color:red;>You have been infected.<br> You can not be un-infected</font>'
+        } 
         document.getElementById('myDateTime').value =  myTimeSinceRestart
         document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)
         localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
@@ -856,13 +887,13 @@ async function renderPrediction() {
            myMaskMultiplier = 1                       // Not Wearing Masks
        }            
          
-       console.log('myMaskPercentAmount')   
-       console.log(myMaskPercentAmount)   
-       console.log('myMaskMultiplier')   
-       console.log(myMaskMultiplier)    
+       //console.log('myMaskPercentAmount')   
+       //console.log(myMaskPercentAmount)   
+       //console.log('myMaskMultiplier')   
+       //console.log(myMaskMultiplier)    
            
        if (document.getElementById('myInsideRadio').checked){
-           myBiomeMultiplier = 1  // inside
+           myBiomeMultiplier = myBiomeMultiplierOriginal  // inside value
        } else {      // outside actually a reducer
            myBiomeMultiplier = myOutsideMultiplier   
        }    
@@ -903,13 +934,24 @@ async function renderPrediction() {
         myMax10Score += myScoreNow
        
         myScoreTotal += myScoreNow   
-        myFontColor = 'green'
+        myFontColor = 'green'      
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
-        if (myScoreTotal > myToRed) {myFontColor = 'red'}
+        if (myAlwaysRed){ myFontColor = 'red'}  // once infected you can't go back
+        if (myScoreTotal > myToRed) {
+            myFontColor = 'red'; 
+            myAlwaysRed = true    
+            localStorage.setItem('myAlwaysColor', myAlwaysRed)  
+        }
+       // console.log('myFontColor ')   
+       // console.log(myFontColor)   
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
-        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
-        document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
+        document.getElementById('myDivTotal').innerHTML = '<font style="font-size:30px; color:' + myFontColor + ';"> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
+        if (myAlwaysRed){     
+          document.getElementById('myDivTotal').innerHTML += '<font style=color:red;>You have been infected.<br> You can not be un-infected</font>'
+       }
+           
+        document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', <br>Closeness Ratio: ' + myCloseness.toFixed(4) + ', <br>Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
 
         // need to save this new total score
