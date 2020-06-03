@@ -43,12 +43,13 @@ limitations under the License.
 
     
     
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@1.7.4"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@1.7.4"></script> 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh@0.0.3"></script>
-
-<!-- Adds the WASM backend to the global backend registry -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@1.7.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.0.0/dist/tf-backend-wasm.js"></script> 
+    
+    
+    
+    
     
     
 
@@ -194,7 +195,9 @@ limitations under the License.
       document.getElementById('myOutsideText').value = myStoreBiome1
       document.getElementById('myOutsideText').style.backgroundColor = 'lime'
       myOutsideMultiplier =  myStoreBiome1       
-    }   
+    } else {     
+      document.getElementById('myOutsideText').value = myOutsideMultiplier
+    }  
                                    
                                    
    
@@ -224,10 +227,10 @@ limitations under the License.
       document.getElementById('myOrange').value = myStoreOrangeHere
       myToOrange =   myStoreOrangeHere                           
       document.getElementById('myOrange').style.backgroundColor = 'lime'                                   
-       document.getElementById('myOrangeDiv').innerHTML = '<font style=color:orange;>Warning at: '+myToOrange  + '</font> '   
+       document.getElementById('myOrangeDiv').innerHTML = '<font style=color:orange;>Warning at: '+myToOrange  + '</font>, '   
     }   else {
        document.getElementById('myOrange').value = myToOrange                         
-       document.getElementById('myOrangeDiv').innerHTML = '<font style=color:orange;>Warning at: '+myToOrange  + '</font> '           
+       document.getElementById('myOrangeDiv').innerHTML = '<font style=color:orange;>Warning at: '+myToOrange  + '</font>, '           
     }
                                          
                                     
@@ -458,6 +461,11 @@ limitations under the License.
 
 
    Inside Multiplier = 1.00<br>
+    
+    
+    
+    
+    
    Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 title="Less than 1 means less of an issue" onChange="{
        myOutsideMultiplier = this.value
        localStorage.setItem('myStoreOutside',  this.value) 
@@ -659,7 +667,7 @@ let myDoSet = true                // for calculating all people not just the fir
 
 
 let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on 1 second intervals
-let myReductionPerInterval = 500  // number of virus you can expell per second. This is important, probably fairly low around 50
+let myReductionPerInterval = 1  // number of virus you can expell per second. This is important, probably fairly low around 50
 
 
 let myMax10Score = 0
