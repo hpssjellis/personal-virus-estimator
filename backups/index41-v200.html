@@ -1,0 +1,1016 @@
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+ let tracks = window.localstream.getTracks();
+ let video = document.querySelector('#your-video-tag-id');
+ tracks.forEach(function(track) {
+     if (track.kind === 'video') {
+         if (track.enabled) {
+             track.stop();
+             track.enabled = false; 
+         }
+     }
+ });
+ video.srcObject = null;
+
+
+
+
+==============================================================================-->
+
+
+
+
+
+
+
+
+<head>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@1.7.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@1.7.4"></script> 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh@0.0.3"></script>
+
+<!-- Adds the WASM backend to the global backend registry -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@1.7.4"></script>
+    
+    
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>  
+
+
+<!--This used to work -->
+    
+    <!--
+
+<script src="https://unpkg.com/@tensorflow/tfjs@2.0.0"></script>    
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh@0.0.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.0.0/dist/tf-backend-wasm.js"></script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
+
+
+-->
+ 
+
+
+    
+    
+    <!-- <script>tf.setBackend('wasm').then(() => main());</script> -->
+
+
+
+
+
+
+
+
+   
+    
+    
+<style>
+  .canvas-wrapper, #scatter-gl-container {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  #scatter-gl-container {
+    border: solid 1px black;
+    position: relative;
+  }
+
+  /* center the canvas within its wrapper */
+  #scatter-gl-container canvas {
+    transform: translate3d(-50%, -50%, 0);
+    left: 50%;
+    top: 50%;
+    position: absolute;
+  }
+    
+ 
+    
+</style>
+</head>
+<body style="width:400px;" onload="{
+
+
+////////////////////////////// local Storage that must be reset if not found ///////////////////////////////////////
+
+   myStorage1 = localStorage.getItem('myStoredText1')
+   if(myStorage1  != null){     
+      document.getElementById('myDateTime').value = myStorage1
+      myTimeSinceRestart =  myStorage1       
+    }   else {
+      myTimeSinceRestart = new Date().getTime()        
+      document.getElementById('myDateTime').value = myTimeSinceRestart        
+    }
+
+
+
+
+    myStorage2 = localStorage.getItem('myStoredText2')
+    if(myStorage2  != null){
+       document.getElementById('myTotalCount').value = myStorage2  
+        myScoreTotal =  myStorage2     
+    } else { 
+        myScoreTotal = 0 
+        document.getElementById('myTotalCount').value = myScoreTotal
+   }
+
+    myStorage3 = localStorage.getItem('myStoredText3')
+    if(myStorage3  != null){
+       document.getElementById('myLastReading').value = myStorage3  
+        myLastAverage =  myStorage3 
+       // console.log('myLastAverage')      
+      //  console.log(myLastAverage)      
+      //  console.log('myScoreTotal old')      
+      //  console.log(myScoreTotal)         
+        const myNow =  new Date().getTime() 
+        const myElapse =  ( myNow -  myTimeSinceRestart)/1000
+      //  console.log('myElapse')
+      //  console.log(myElapse)
+        const myExtraScore =   myElapse * myLastAverage    
+      //  console.log('myExtraScore')  
+      //  console.log(myExtraScore)   // seconds since last app load
+        myScoreTotal = parseFloat(myScoreTotal) + parseFloat(myExtraScore)                     // calculates if count same for duration of break          
+      //  console.log('myScoreTotal new')            
+      //  console.log(myScoreTotal)                
+      //  console.log()      
+        document.getElementById('myTotalCount').value = myScoreTotal
+    } else { 
+        myLastAverage = 0 
+        document.getElementById('myLastReading').value = myLastAverage
+   }
+
+
+
+    myStorage4 = localStorage.getItem('myStoredText4')
+    if(myStorage4  != null){
+       document.getElementById('myCameraMode').value = myStorage4  
+      // document.getElementById('myCameraMode').value = myFacingModeSetting
+       myFacingModeSetting =  myStorage4 
+         if (myStorage4 == 'user'){
+           document.getElementById('myCameraButton').value = 'Rear Camera'  // button says read camera since front working                      
+         } else {
+           document.getElementById('myCameraButton').value = 'Front Camera'                         
+        }                          
+                                   
+                                   
+    } else { 
+        myFacingModeSetting = 'user' // only during testing
+        document.getElementById('myCameraMode').value = myFacingModeSetting
+   }
+
+ ///////////////////////////////// local storage that unless saved is updated by newer versions of the app.//////////////////////              
+ 
+              
+  
+   let myStoreBiome1 = localStorage.getItem('myStoreOutside')
+   if(myStoreBiome1  != null){     
+      document.getElementById('myOutsideText').value = myStoreBiome1
+      document.getElementById('myOutsideText').style.backgroundColor = 'lime'
+      myOutsideMultiplier =  myStoreBiome1       
+    }   
+                                   
+                                   
+   
+   let myStoreBreeze1 = localStorage.getItem('myStoreBreezeLevel1')
+   if(myStoreBreeze1  != null){     
+      document.getElementById('myBreezeLevel1').value = myStoreBreeze1
+      document.getElementById('myBreezeLevel1').style.backgroundColor = 'lime'
+    }   
+                                   
+    
+   let myStoreBreeze2 = localStorage.getItem('myStoreBreezeLevel2')
+   if(myStoreBreeze2  != null){     
+      document.getElementById('myBreezeLevel2').value = myStoreBreeze2
+      document.getElementById('myBreezeLevel2').style.backgroundColor = 'lime'
+    }   
+          
+   let myStoreBreeze3 = localStorage.getItem('myStoreBreezeLevel3')
+   if(myStoreBreeze3  != null){     
+      document.getElementById('myBreezeLevel3').value = myStoreBreeze3
+      document.getElementById('myBreezeLevel3').style.backgroundColor = 'lime'
+    }   
+                                         
+                                          
+                                   
+   let myStoreOrangeHere = localStorage.getItem('myStoreOrange')
+   if(myStoreOrangeHere  != null){     
+      document.getElementById('myOrange').value = myStoreOrangeHere
+      myToOrange =   myStoreOrangeHere                           
+      document.getElementById('myOrange').style.backgroundColor = 'lime'                                   
+       document.getElementById('myOrangeDiv').innerHTML = '<font style=color:orange;>Warning at: '+myToOrange  + '</font> '   
+    }   else {
+       document.getElementById('myOrange').value = myToOrange                         
+       document.getElementById('myOrangeDiv').innerHTML = '<font style=color:orange;>Warning at: '+myToOrange  + '</font> '           
+    }
+                                         
+                                    
+   let myStoreRedHere = localStorage.getItem('myStoreRed')
+   if(myStoreRedHere  != null){     
+      document.getElementById('myRed').value = myStoreRedHere
+      myToRed =   myStoreRedHere                           
+      document.getElementById('myRed').style.backgroundColor = 'lime'                        
+      document.getElementById('myRedDiv').innerHTML  = ' <font style=color:red;>Infected at: '+myToRed  + '</font>'    
+    }    else {  
+      document.getElementById('myRed').value = myToRed               
+      document.getElementById('myRedDiv').innerHTML = ' <font style=color:red;>Infected at: '+myToRed  + '</font>'          
+    }  
+                                                  
+                                       
+   let myStoreReduceHere = localStorage.getItem('myStoreReducer')
+   if(myStoreReduceHere  != null){     
+      document.getElementById('myReducer').value = myStoreReduceHere
+      myReductionPerInterval =   myStoreReduceHere                           
+      document.getElementById('myReducer').style.backgroundColor = 'lime'
+    }    else {  
+      document.getElementById('myReducer').value = myReductionPerInterval       
+    }  
+          
+                                                  
+               
+                                   
+                                   
+                                   
+   let myStoreMaskHere = localStorage.getItem('myStoreMaskPercent')
+   if(myStoreMaskHere  != null){     
+      document.getElementById('myMaskPercent').value = myStoreMaskHere
+      myMaskPercentAmount = myStoreMaskHere
+      document.getElementById('myMaskPercent').style.backgroundColor = 'lime'
+      document.getElementById('myMaskType').value = ''  // selection box
+      document.getElementById('myMaskFit').value = ''   // selection box
+    }             
+              
+              
+              
+////////////////////////////////////// end local storage loading     /////////////////////////////////////////////         
+
+          
+}">   
+    <h4 align=center " >Social Distancing Game</h4>  
+    
+  <div id="main">	
+    <div class="container">        	
+      <div class="canvas-wrapper">
+          
+
+        <canvas id="output"></canvas>
+        <video id="video" playsinline style="
+          -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+          visibility: hidden;
+          width: auto;
+          height: auto;
+          ">
+            
+          
+        </video>     
+          
+
+        </div>
+
+    
+      <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
+      <span id="myOrangeDiv">orange</span>   <span id="myRedDiv">red</span>  
+                                                      
+           </div>
+        </div> 
+ 
+    
+   
+    <!--    --------------------------- Quick Choices ----------------------------------- --> 
+    
+    
+      
+    <input id="myMaskOffRadio" type=radio name="myMaskRadioName" Checked> <-- My Mask Off, 
+    My Mask On --> <input id="myMaskOnRadio" type=radio name="myMaskRadioName"><br> <br>  
+    
+    
+    <input id="myInsideRadio" type=radio name="myBiomeRadioName" Checked> <-- Inside, 
+    Outside --> <input id="myOutsideRadio" type=radio name="myBiomeRadioName"><br><br>
+    
+    
+    
+    
+    
+    Breeze: <select id="myBreezeSelect" onChange = "{
+       if (this.value == '0'){
+           document.getElementById('myBreezeButton').style.visibility = 'hidden'
+       } else {      
+           document.getElementById('myBreezeButton').style.visibility = 'visible'
+       }
+    }"
+    <option value='0'> </option>
+    <option value='0'>No Breeze</option>
+    <option value='1' selected>Level 1</option>
+    <option value='2'>Level 2</option>
+    <option value='3'>Level 3</option>
+    </select><br>
+     
+    
+    <input id="myBreezeButton" type=button value="Facing Breeze"  style="position:absolute; visibility:visible; width:100px; height:30px; left:30px; top:250px"  onTouchStart="{
+       this.onMouseOver(); event.preventDefault();
+    }"  onMouseOver="{
+        document.getElementById('myBreezeButton').style.backgroundColor = 'lime'
+        myFacingBreeze = true             
+    }"  onTouchEnd="{
+        this.onMouseOut(); event.preventDefault();
+    }"  onMouseOut="{
+        document.getElementById('myBreezeButton').style.backgroundColor = 'lightgrey' 
+        myFacingBreeze = false              
+    }" 
+    <br><br>
+    
+      
+
+      
+      
+      
+    <!--    --------------------------- main Buttons ----------------------------------- -->
+    
+    <input id="myOffButton" type=button value="Pause Video" onclick="{
+       if (myStopApp){ 
+          myStopApp = false                                      
+        // document.getElementById('video').play()
+        // renderPrediction();
+         document.getElementById('myOffButton').value = 'Pause Video'
+         location.reload()
+       } else {
+            myStopApp = true
+            document.getElementById('video').pause()
+            document.getElementById('myOffButton').value = 'Restart Video'
+            myDitchVideo()       // not yet working to fully shut down video and analysis.                            
+       }                                   
+   }">
+    
+    <input type=button value="Reset Total Score to Zero" onclick="{
+          myScoreTotal = 0      
+          myTimeSinceRestart = new Date().getTime()
+          document.getElementById('myDateTime').value =  myTimeSinceRestart
+          document.getElementById('myTotalCount').value = myScoreTotal
+          localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
+          localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)  
+          localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)  
+          localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)  
+    }">
+
+
+       <input id="myCameraButton" type=button value="Rear Camera" onclick="{
+       if (myFacingModeSetting == 'user'){ 
+           myFacingModeSetting = 'environment'                                    
+           document.getElementById('myCameraButton').value = 'Front Camera'
+           document.getElementById('myCameraMode').value = myFacingModeSetting
+           localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+           location.reload();
+       } else {
+          myFacingModeSetting = 'user'                                    
+          document.getElementById('myCameraButton').value = 'Rear Camera' 
+          document.getElementById('myCameraMode').value = myFacingModeSetting
+          localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+          location.reload();                            
+       }                                   
+   }"> 
+    
+    <br>    <br>
+    
+     
+
+  <div id="myDiv01">...</div> <br>
+
+          <div id="myInstructions" " onclick="document.getElementById('myInstructions').style.display='none';" style="display:inline; visibility:visible;">
+    <h4>Social Distance Game. Keep Your SDS (Social Distance Score) as low as possible, see if you can last the day before
+        getting in the red zone. Use your cell phones rear camera while you walk around. 
+        Stay in the green as long as possible. The orange is a warning. Red means you have lost this round of the game.
+        Click to remove this note</h4>
+    </div>
+                        
+                   
+                   
+     <hr> <br><br>  <br><br>  <br><br>  <br><br> 
+    <h4>Below here are more advanced setting, most users can ignore.</h4>
+
+<!--  <div id="myDiv02">...</div> --> 
+    <br>
+    <h4>Variables that must be saved and reloaded from local storage</h4>
+    
+    DateTime: <input id="myDateTime" type=text value=0 placeholder = "Important Date Time Value" Title = "Milliseconds since January 1st of 1970 UTC"><br>
+    Total SDS: <input id="myTotalCount" type=text value=0 placeholder = "Important Total Count Value"  title="Combined Social Distance Score" ><br>
+    SDS Now: <input id="myLastReading" type=text value=0 placeholder = "Last Reading"  title="Latest Social Distance Score"><br>
+    Camera Mode: <input id="myCameraMode" type=text value=0 placeholder = "user or environment"   title="Front Camera = user,  Rear Camera = environment"><br>
+    
+    <input type="button" value="Store the above, might want to pause the app first" onClick="{
+   localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
+   localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value)
+   localStorage.setItem('myStoredText3', document.getElementById('myLastReading').value)
+   localStorage.setItem('myStoredText4', document.getElementById('myCameraMode').value)
+ /*
+   alert('DateTime =' + document.getElementById('myDateTime').value +
+        '\n\nTotal Count='+ document.getElementById('myTotalCount').value +
+        '\n\nLast Reading='+ document.getElementById('myLastReading').value +
+        '\n\nCamera Mode='+ document.getElementById('myCameraMode').value +
+        '\n\nHas been stored, now resetting App')
+ */                                                            
+   location.reload()
+}">
+ 
+    
+    <hr>
+    <h5>Variables that are saved only if you change them. Will reload this App</h5>  
+    
+    
+    
+    <input type=button value="Clear ALL Local Stored variables" onClick="{
+      if (confirm('Clear all the variables you have stored, resetting App to defualts?')) {
+          window.localStorage.clear(); 
+          myScoreTotal = 0   // since retained by the app
+          location.reload()
+      }                                                                                                                                                                                                    
+    }"><br><br>
+    
+
+
+
+
+
+   Inside Multiplier = 1.00<br>
+   Outside Mult: <input id="myOutsideText" type=text value = 0.2 size=5 title="Less than 1 means less of an issue" onChange="{
+       myOutsideMultiplier = this.value
+       localStorage.setItem('myStoreOutside',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreOutside')   
+      location.reload()
+   }"><br><br>
+
+<!--  ------------------------------------------ breeze HTML ----------------------------------- -->
+
+   No Breeze Multiplier = 1.00<br>
+   Breeze Level 1: <input id="myBreezeLevel1" type=text value = 1.5 size=5 Title="A Thread shows breeze direction" onChange="{
+       localStorage.setItem('myStoreBreezeLevel1',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreBreezeLevel1')   
+      location.reload()
+   }"><br>
+
+
+   Breeeze Level 2: <input id="myBreezeLevel2" type=text value = 2.5 size=5  Title="Breeze can be felt" onChange="{
+       localStorage.setItem('myStoreBreezeLevel2',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreBreezeLevel2')   
+      location.reload()
+   }"><br>
+
+   Breeze Level 3: <input id="myBreezeLevel3" type=text value = 5 size=5 Title="Like in front of a fan" onChange="{
+       localStorage.setItem('myStoreBreezeLevel3',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreBreezeLevel3')   
+      location.reload()
+   }"><br><br>
+
+
+   Orange Setting: <input id="myOrange" type=text value = ""  title="Warning amount"  size=5 onChange="{
+       localStorage.setItem('myStoreOrange',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreOrange')   
+      location.reload()
+   }"><br>
+
+   Red Setting: <input id="myRed" type=text value = ""  title="Danger amount" size=5 onChange="{
+       localStorage.setItem('myStoreRed',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreRed')   
+      location.reload()
+   }"><br><br>
+
+   Reduction per second: <input id="myReducer" type=text value = ""  title="Reduce every second" size=5 onChange="{
+       localStorage.setItem('myStoreReducer',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreReducer')   
+      location.reload()
+   }"><br><br>
+
+
+
+   
+
+Mask Filtration Percent: <input id="myMaskPercent" type=text value=50 Size=5 Title="(Science could help a bit here)"    onChange="{
+       localStorage.setItem('myStoreMaskPercent',  this.value) 
+       location.reload()
+   }" >%    
+   <input type=button value="Set" onclick="{
+     localStorage.setItem('myStoreMaskPercent',  myMaskPercentAmount) 
+     location.reload()
+   }">    
+    
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myStoreMaskPercent')   
+      location.reload()
+   }"><br>
+
+<select id="myMaskType" onChange="{
+  if (document.getElementById('myMaskPercent').style.backgroundcolor == 'lime'){document.getElementById('myMaskPercent').style.backgroundcolor = 'yellow'}                                
+  if (document.getElementById('myMaskFit').value == ''){document.getElementById('myMaskFit').value = 1}                                
+  myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
+  document.getElementById('myMaskPercent').value = myMaskPercentAmount
+  }">
+   <option ></option>
+   <option value=95>N95</option>
+   <option value=70>Surgical Mask</option>
+   <option value=70>4 Layer Mask Good Material(s)</option>
+   <option value=60>3 Layer Mask Good Material(s)</option>
+   <option value=50 selected>2 Layer Mask Good Material</option>
+   <option value=40>1 Layer Mask Good Material</option>
+   <option value=20>1 Layer Mask Visible Holes</option>
+</select>
+
+<select id="myMaskFit" onChange="{
+ if (document.getElementById('myMaskType').value == ''){document.getElementById('myMaskType').value = 50}   
+  myMaskPercentAmount =  document.getElementById('myMaskType').value * document.getElementById('myMaskFit').value
+ document.getElementById('myMaskPercent').value = myMaskPercentAmount
+}">
+    <option></option>
+    <option value=1 selected>Sealed Well</option>
+   <option value=0.75>Fogs Glasses</option>
+   <option value=0.50>Loose All Around</option>
+</select><br><br>
+
+Note:Any mask helps other people from your respiratory droplets (This is called Source Control) You wearing a mask stops the 
+    droplets before they evaporate and become even smaller and much more difficult to stop!
+This Machine Learning Model's confidence is lowered by people wearing masks and that reduces the effect.
+However, this Machine Learning Model is not specifically trained to identify masks!<br>
+ 
+    
+    
+    
+
+
+
+
+   
+<!-- --------------------------------End local storage variables------------------------------------------------  -->
+    <hr>
+    
+    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>
+    <h5>Known Issues with this version of the Social Distance Machine Learning Web App</h5>
+    <ul>
+        <li> <b>Point the camera away from people before closing, otherwise that score will be calculated each second upon re openning the app.
+            This issue can be used to determine you average score for the duration you are not moving, like at work or on a bus.</b><br>
+        <li> If people are facing away from you, but a breeze is flowing towards you. No detection since no face is visible<br>
+        <li> Small faces will be analyzed as slightly farther away than large faces. 
+            Kids are detected as slightly farther away than adults. <br>
+        <li> Infection Viral load and Viral Reduction per second are just a guess at the moment.<br>
+        <li> Effectiveness of homemade multilayer cloth masks for personal protection has very little scientific support at the moment 
+            (Effectiveness for source control of even single layer homemade mask is presently highly supported as of April 2020)<br> 
+    </ul><br><br>
+    
+  <h5> This Social Distancing Game can educate people about using physical distancing to reduce the number of respiratory droplets 
+      a person might be subjected to. This Machine Learning Web App has minimal scientific backing to be more than anything
+      except a game, but it does point the way for Science and Machine Learning to work together to make Apps which can handle 
+      complex physical situations to assist people in learning a new task or a new topic. </h5>
+    
+    
+</body>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script> -->
+
+
+<!-- <script src="index.js"></script>  -->
+
+
+
+
+
+
+<!--  
+
+----------------------------------old index.js merged here----------------------------------------------------
+
+-->
+
+<script>
+
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+
+//Global Variables
+let myScoreNow = 0
+let myScoreTotal 
+let myPersonMultiplier = 50   // theoretically different for each person default set at 50. Lower means better defending virus
+
+let myStopApp = false
+let myDistanceCutoff = 10 // 50  // Distance in pixels that a facewidth is not relevant  close = 600-200  
+let myMouthOpenCutoff = 0.03
+
+let myTimeSinceRestart 
+let myTimeSinceAwake = 0
+let myDoSet = true                // for calculating all people not just the first
+
+
+
+let myDetectionInterval = 1000   // milliseconds Do not change. Concept based on 1 second intervals
+let myReductionPerInterval = 500  // number of virus you can expell per second. This is important, probably fairly low around 50
+
+
+let myMax10Score = 0
+let myMaxWaitScore = 0
+let myLastAverage
+let myFacingModeSetting = 'user'
+
+
+let myToRed = 4000   // loosely airborne RNA load for average person to get infected. Please help me science 
+let myToOrange = 3000 // Loosely airborne RNA to get concerned. Please help me science
+let myFontColor = 'green'  
+
+
+let myOutsideMultiplier = 0.0526   // orignal 0.20    how much outside is better than inside 19* 1/19 = 0.0526 is latest research
+let myBiomeMultiplier      // need to test if outside or inside
+let myBiomeMultiplierOriginal = 0.01   //Originally I set at 1, but to reduce numbers I am reducing this a lot
+
+let myMaskMultiplier = 1
+let myMaskPercentAmount = 50
+let myBreezeMultiplier = 1
+let myFacingBreeze = false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+function myDitchVideo(){
+// not yet fully stopping webcam
+}    
+    
+    
+function isMobile() {
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  return isAndroid || isiOS;
+}
+
+function drawPath(ctx, points, closePath) {
+  const region = new Path2D();
+  region.moveTo(points[0][0], points[0][1]);
+  for (let i = 1; i < points.length; i++) {
+    const point = points[i];
+    region.lineTo(point[0], point[1]);
+  }
+
+  if (closePath) {
+    region.closePath();
+  }
+  ctx.stroke(region);
+}
+
+let model, ctx, videoWidth, videoHeight, video, canvas,
+    scatterGLHasInitialized = false, scatterGL;
+
+const VIDEO_SIZE = 500;
+const mobile = isMobile();
+// Don't render the point cloud on mobile in order to maximize performance and
+// to avoid crowding limited screen space.
+const renderPointcloud = mobile === false;
+const state = {
+  backend: 'wasm',
+  maxFaces: 10,
+  triangulateMesh: false
+};
+
+if (renderPointcloud) {
+  state.renderPointcloud = true;
+}
+
+
+    
+    
+    
+async function setupCamera() {
+  video = document.getElementById('video');
+
+  const stream = await navigator.mediaDevices.getUserMedia({
+    'audio': false,
+    'video': {
+      facingMode: myFacingModeSetting,
+      // Only setting the video to a specified size in order to accommodate a
+      // point cloud, so on mobile devices accept the default size.
+      width: mobile ? undefined : VIDEO_SIZE,
+      height: mobile ? undefined : VIDEO_SIZE
+    },
+  });
+  video.srcObject = stream;
+
+  return new Promise((resolve) => {
+    video.onloadedmetadata = () => {
+      resolve(video);
+    };
+  });
+}
+
+async function renderPrediction() {
+
+  const predictions = await model.estimateFaces(video);
+   // console.log(predictions[0].faceInViewConfidence)
+  
+
+    
+  ctx.drawImage(
+      video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
+
+  if   (predictions.length <= 0) {                                           // not doing the below but still need to reduce virus
+       let elapsedTime2 = new Date().getTime() - myTimeSinceRestart;  // in ms
+      // console.log('elapsedTime2')
+      // console.log(elapsedTime2)
+       if (elapsedTime2 >= myDetectionInterval){
+           myTimeSinceRestart = new Date().getTime()
+           myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
+          // console.log('myScoreTotal')          
+          // console.log(myScoreTotal)
+       }   
+       if (myScoreTotal < 0){myScoreTotal = 0} 
+        myFontColor = 'green'
+        if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
+        if (myScoreTotal > myToRed) {myFontColor = 'red'}
+      
+        document.getElementById('myDivNow').innerHTML = '0'
+        document.getElementById('myDivTotal').innerHTML = '<font style=color:' + myFontColor + ';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>' 
+      
+        document.getElementById('myDateTime').value =  myTimeSinceRestart
+        document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)
+        localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
+        localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
+      
+        document.getElementById('myLastReading').value =  0
+        localStorage.setItem('myStoredText3', 0) 
+      
+  }
+  if (predictions.length > 0) {
+      
+
+           
+        myDoSet = false   
+        myScoreNow = 0  
+        myMax10Score = 0 
+        //document.getElementById('myDivNow').innerHTML = 'SDS per second: ' 
+
+
+
+
+        predictions.forEach(prediction => {
+
+        
+        const keypoints = prediction.scaledMesh;
+     // console.log(keypoints[234])
+      
+      // myTimeSinceRestart = new Date().getTime()    // checking if a second has passed
+       let elapsedTime = new Date().getTime() - myTimeSinceRestart;  // in ms
+       if (elapsedTime >= myDetectionInterval){  
+          myDoSet = true; 
+          myTimeSinceRestart = new Date().getTime()
+           
+         document.getElementById('myDiv01').innerHTML = ''
+         myScoreTotal -= myReductionPerInterval      // what your body can remove per interval
+         if (myScoreTotal < 0){myScoreTotal = 0}  
+
+          // backing up to local storage 
+          document.getElementById('myDateTime').value =  myTimeSinceRestart
+          document.getElementById('myTotalCount').value = myScoreTotal.toFixed(0)
+          localStorage.setItem('myStoredText1', document.getElementById('myDateTime').value)   
+          localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
+       }
+       
+     if (myDoSet){       
+       try {
+        let myFaceWidth =  keypoints[454][0] - keypoints[234][0]  
+        let myCloseness =  (myFaceWidth - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
+        if (myCloseness < 0 ){myCloseness = 0}
+        
+        let myMouthOpen = (keypoints[14][1] - keypoints[13][1])
+        let myMouthShut =  ( (myMouthOpen )/ (myMouthOpenCutoff * myFaceWidth) )   // myMouthOpenCutoff default ~0.03
+ 
+           
+        if (myMouthShut < 1 ){myMouthShut = 1}       
+        myMouthShut *= prediction.faceInViewConfidence  // reduce effect if wearing a mask and low confidence score
+        
+       if (document.getElementById('myMaskOnRadio').checked){  // Is a mask on?
+          myMaskPercent = parseFloat(document.getElementById('myMaskPercent').value)
+           
+           myMaskMultiplier = 1 -(myMaskPercent/100)  // Wearing mask, Change mass filtration percent to reduce the SDS  
+       } else {                                       
+           myMaskMultiplier = 1                       // Not Wearing Masks
+       }            
+         
+       console.log('myMaskPercentAmount')   
+       console.log(myMaskPercentAmount)   
+       console.log('myMaskMultiplier')   
+       console.log(myMaskMultiplier)    
+           
+       if (document.getElementById('myInsideRadio').checked){
+           myBiomeMultiplier = myBiomeMultiplierOriginal  // inside value
+       } else {      // outside actually a reducer
+           myBiomeMultiplier = myOutsideMultiplier   
+       }    
+           
+             
+   
+           
+  
+           
+           
+           
+     if (myFacingBreeze){    
+        if (document.getElementById('myBreezeSelect').value == 0){
+           myBreezeMultiplier   = 1
+        } 
+        else if (document.getElementById('myBreezeSelect').value == 1){
+           myBreezeMultiplier   = parseFloat(document.getElementById('myBreezeLevel1').value)
+        }         
+        else if (document.getElementById('myBreezeSelect').value == 2){
+           myBreezeMultiplier   = parseFloat(document.getElementById('myBreezeLevel2').value)
+        }         
+        else if (document.getElementById('myBreezeSelect').value == 3){
+           myBreezeMultiplier   = parseFloat(document.getElementById('myBreezeLevel3').value)
+        }            
+      }  else {  myBreezeMultiplier   = 1}  
+           
+              
+       // console.log('myFacingBreeze') 
+       // console.log(myFacingBreeze) 
+       // console.log('myBreezeMultiplier')   
+       // console.log(myBreezeMultiplier)   
+           
+           
+           
+           
+           
+        myScoreNow =  prediction.faceInViewConfidence * myCloseness * myMouthShut * myPersonMultiplier  * myMaskMultiplier * myBiomeMultiplier * myBreezeMultiplier
+        myMax10Score += myScoreNow
+       
+        myScoreTotal += myScoreNow   
+        myFontColor = 'green'
+        if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
+        if (myScoreTotal > myToRed) {myFontColor = 'red'}
+         
+        document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
+        document.getElementById('myDivTotal').innerHTML = '<font style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
+        document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
+        // console.log(prediction.faceInViewConfidence.toFixed(4))
+
+        // need to save this new total score
+        document.getElementById('myTotalCount').value = myScoreTotal.toFixed(2)  
+        localStorage.setItem('myStoredText2', document.getElementById('myTotalCount').value) 
+        document.getElementById('myLastReading').value =   myMax10Score.toFixed(2) 
+        localStorage.setItem('myStoredText3', myMax10Score.toFixed(2))  
+
+
+
+
+
+
+      }
+      catch(err){
+      document.getElementById('myDiv01').innerHTML = err.message;
+      }   
+         
+      }   
+        
+        
+      if (state.triangulateMesh) {
+         
+         // not done for this app. Makes a mesh out of the face dots   
+          
+      } else {
+        for (let i = 0; i < keypoints.length; i++) {
+          const x = keypoints[i][0];
+          const y = keypoints[i][1];
+
+          ctx.beginPath();
+          ctx.arc(x, y, 1 /* radius */, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+      }
+    });
+
+      
+   
+   }   
+  
+    if (myStopApp == false){
+      requestAnimationFrame(renderPrediction);
+   }
+};
+
+async function main() {
+     
+  const state = {
+     backend: 'wasm'
+  }; 
+         
+  await tf.setBackend(state.backend);
+  //setupDatGui();
+
+
+  await setupCamera();
+  video.play();
+  videoWidth = video.videoWidth;
+  videoHeight = video.videoHeight;
+  video.width = videoWidth;
+  video.height = videoHeight;
+
+  canvas = document.getElementById('output');
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
+  const canvasContainer = document.querySelector('.canvas-wrapper');
+  canvasContainer.style = `width: ${videoWidth}px; height: ${videoHeight}px`;
+
+  ctx = canvas.getContext('2d');
+    
+  if (myFacingModeSetting == 'user'){   // flip the horizontal
+     ctx.translate(canvas.width, 0);
+     ctx.scale(-1, 1);
+  } 
+    
+    
+  ctx.fillStyle = '#32EEDB';
+  ctx.strokeStyle = '#32EEDB';
+  ctx.lineWidth = 0.5;
+
+  model = await facemesh.load({maxFaces: state.maxFaces});
+  renderPrediction();
+
+    
+  };   
+    
+
+
+main();
+      
+</script>
+
+
+<h6>This is a game, use at your own risk!<br>
+Made by Jeremy Ellis<br>
+Website:<a href="https://www.rocksetta.com">www.rocksetta.com</a><br>
+Twitter: <a href="https://twitter.com/rocksetta">@rocksetta</a> 
+
+</h6>
