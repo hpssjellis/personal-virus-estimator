@@ -812,6 +812,7 @@ async function renderPrediction() {
         if (myScoreTotal > myToRed) {
             myFontColor = 'red'
             myAlwaysRed = true
+            localStorage.setItem('myAlwaysColor', myAlwaysRed)  
         }
        //  console.log('myFontColor early')   
        // console.log(myFontColor) 
@@ -936,7 +937,11 @@ async function renderPrediction() {
         myFontColor = 'green'      
         if (myScoreTotal > myToOrange) {myFontColor = 'orange'}
         if (myAlwaysRed){ myFontColor = 'red'}  // once infected you can't go back
-        if (myScoreTotal > myToRed) {myFontColor = 'red'; myAlwaysRed = true}
+        if (myScoreTotal > myToRed) {
+            myFontColor = 'red'; 
+            myAlwaysRed = true    
+            localStorage.setItem('myAlwaysColor', myAlwaysRed)  
+        }
        // console.log('myFontColor ')   
        // console.log(myFontColor)   
          
