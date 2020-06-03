@@ -186,8 +186,14 @@ limitations under the License.
         document.getElementById('myCameraMode').value = myFacingModeSetting
    }
 
- ///////////////////////////////// local storage that unless saved is updated by newer versions of the app.//////////////////////              
- 
+ ///////////////////////////////// local storage that unless saved is updated by newer versions of the app.//////////////////////  
+                                   
+                                   
+   let myAlways = localStorage.getItem('myAlwaysColor')
+   if(myAlways  != null){     
+      myAlwaysRed =  myAlways    // in this case probably true     
+    } // defined on startup as false
+         
               
   
    let myStoreBiome1 = localStorage.getItem('myStoreOutside')
@@ -372,7 +378,8 @@ limitations under the License.
    }">
     
     <input type=button value="Reset Total Score to Zero" onclick="{
-          myScoreTotal = 0      
+          myScoreTotal = 0 
+          myAlwaysRed = false
           myTimeSinceRestart = new Date().getTime()
           document.getElementById('myDateTime').value =  myTimeSinceRestart
           document.getElementById('myTotalCount').value = myScoreTotal
