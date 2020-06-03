@@ -194,7 +194,20 @@ limitations under the License.
       myAlwaysRed =  myAlways    // in this case probably true     
     } // defined on startup as false
          
-              
+ 
+                                   
+    
+   let myPerson1 = localStorage.getItem('myPerson')
+   if(myPerson1  != null){     
+      document.getElementById('myPersonText').value = myPerson1
+      document.getElementById('myPersonText').style.backgroundColor = 'lime'
+      myPersonMultiplier =  myPerson1       
+    } else {     
+      document.getElementById('myPersonText').value = myPersonMultiplier
+    }  
+                                              
+                                   
+                                   
   
    let myStoreBiome1 = localStorage.getItem('myStoreOutside')
    if(myStoreBiome1  != null){     
@@ -465,6 +478,26 @@ limitations under the License.
     
 
 
+    
+    
+    
+    
+   Person Mult: <input id="myPersonText" type=text value = 1 size=5 title="Less than 1 means less of an issue" onChange="{
+       myPersonMultiplier = this.value
+       localStorage.setItem('myPerson',  this.value) 
+       location.reload()
+   }"> 
+   <input type=button value="Default" onclick="{
+      localStorage.removeItem('myPerson')   
+      location.reload()
+   }">
+    
+    This value is the main driving value for the Web App. Originally set at 1.00. 
+    Set lower for less of a threat. Higher for a bigger threat
+    
+    <br><br>    
+    
+    
 
 
 
