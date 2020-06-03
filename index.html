@@ -225,9 +225,11 @@ limitations under the License.
    if(myStoreOrangeHere  != null){     
       document.getElementById('myOrange').value = myStoreOrangeHere
       myToOrange =   myStoreOrangeHere                           
-      document.getElementById('myOrange').style.backgroundColor = 'lime'
+      document.getElementById('myOrange').style.backgroundColor = 'lime'                                   
+       document.getElementById('myOrangeDiv').value = 'Warning: '+myToOrange     
     }   else {
-       document.getElementById('myOrange').value = myToOrange       
+       document.getElementById('myOrange').value = myToOrange                         
+       document.getElementById('myOrangeDiv').value = 'Warning at: '+myToOrange           
     }
                                          
                                     
@@ -235,9 +237,11 @@ limitations under the License.
    if(myStoreRedHere  != null){     
       document.getElementById('myRed').value = myStoreRedHere
       myToRed =   myStoreRedHere                           
-      document.getElementById('myRed').style.backgroundColor = 'lime'
+      document.getElementById('myRed').style.backgroundColor = 'lime'                        
+      document.getElementById('myRedDiv').value = 'Infected at: '+myToRed    
     }    else {  
-      document.getElementById('myRed').value = myToRed        
+      document.getElementById('myRed').value = myToRed               
+      document.getElementById('myRedDiv').value = 'Infected at: '+myToRed          
     }  
                                                   
                                        
@@ -294,6 +298,8 @@ limitations under the License.
 
     
       <div id="myDivNow"></div>   <div id="myDivTotal">...</div>  
+      <div id="myOrangeDiv"></div>   <div id="myRedDiv"></div>  
+                                                      
            </div>
         </div> 
  
@@ -908,7 +914,7 @@ async function renderPrediction() {
         if (myScoreTotal > myToRed) {myFontColor = 'red'}
          
         document.getElementById('myDivNow').innerHTML = 'SDS per second: ' + myMax10Score.toFixed(2) 
-        document.getElementById('myDivTotal').innerHTML = '<h1 style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
+        document.getElementById('myDivTotal').innerHTML = '<font style=color:'+ myFontColor +';> Total SDS: ' + myScoreTotal.toFixed(2) + '</font><br>'
         document.getElementById('myDiv01').innerHTML += 'Model Confidence: ' + prediction.faceInViewConfidence.toFixed(3) + ', Closeness Ratio: ' + myCloseness.toFixed(4) + ', Mouth Open Ratio: ' + myMouthShut.toFixed(2)    +'<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
 
