@@ -380,6 +380,7 @@ limitations under the License.
     <input type=button value="Reset Total Score to Zero" onclick="{
           myScoreTotal = 0 
           myAlwaysRed = false
+          localStorage.setItem('myAlwaysColor', myAlwaysRed)  
           myTimeSinceRestart = new Date().getTime()
           document.getElementById('myDateTime').value =  myTimeSinceRestart
           document.getElementById('myTotalCount').value = myScoreTotal
